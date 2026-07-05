@@ -732,7 +732,50 @@ n\ge \frac{1}{4\delta\varepsilon^2}
   \item dann $E(X)=\int x f(x)\dd x$, $\Var(X)=E(X^2)-E(X)^2$
 \end{itemize}
 
-\section*{16. Notation, die Punkte bringt}
+\textbf{Keywords $\Rightarrow$ Methode}
+\begin{itemize}
+  \item ``genau $k$ Treffer'' $\Rightarrow$ meist Binomial: $\binom{n}{k}p^k(1-p)^{n-k}$
+  \item ``mindestens / hoechstens'' $\Rightarrow$ Binomialsumme oder Gegenereignis
+  \item ``bis zum ersten Treffer'' / ``erst beim $k$-ten Mal'' $\Rightarrow$ geometrisch
+  \item ``ohne Zuruecklegen'' $\Rightarrow$ hypergeometrisch
+  \item ``mit Zuruecklegen'' / ``unabhaengige Wiederholungen'' $\Rightarrow$ binomial
+  \item ``in wie vielen Anordnungen'' $\Rightarrow$ Kombinatorik
+  \item ``gleiche Objekte nicht unterscheiden'' $\Rightarrow$ Permutation mit Wiederholung
+  \item ``gemeinsame Verteilung'' / Tabelle $\Rightarrow$ alle Paare $(x,y)$ systematisch bestimmen
+  \item ``stochastisch unabhaengig?'' $\Rightarrow$ Produktkriterium
+  \item ``im Mittel'' $\Rightarrow$ Erwartungswert
+  \item ``Streuung'' / ``Standardabweichung'' $\Rightarrow$ Varianz, $\sigma$
+  \item ``untere Schranke fuer Wahrscheinlichkeit'' $\Rightarrow$ oft Tschebyscheff
+  \item ``mit hoechstens 5\% Wahrscheinlichkeit ausverkauft / nicht ausreichen'' $\Rightarrow$ Quantil, oft Normalapproximation
+  \item ``approximiere durch Normalverteilung'' $\Rightarrow$ de Moivre-Laplace / CLT + Stetigkeitskorrektur
+  \item ``schaetzen'' / ``Anteil in Grundgesamtheit'' $\Rightarrow$ $\hat p=r_n$
+  \item ``Konfidenzintervall'' $\Rightarrow$ Schaetzer $\pm$ Quantil $\cdot$ Standardfehler
+  \item ``Hypothesentest'' / ``Verdacht'' / ``behauptet'' $\Rightarrow$ $H_0,H_1$, Teststatistik, kritischer Bereich
+  \item ``gegeben, dass'' $\Rightarrow$ bedingte Wahrscheinlichkeit
+  \item ``Ursache nach Beobachtung'' $\Rightarrow$ Bayes
+  \item ``Dichtefunktion'' $\Rightarrow$ integrieren, nie summieren
+  \item ``Parameter $c$ bestimmen'' bei Dichte/Wkt.-Funktion $\Rightarrow$ Normierung auf $1$
+  \item ``normalverteilt'' $\Rightarrow$ standardisieren: $Z=\frac{X-\mu}{\sigma}$
+\end{itemize}
+
+\textbf{Typische Formulierungen sauber uebersetzen}
+\begin{itemize}
+  \item ``mindestens $k$'' $\Rightarrow P(X\ge k)$
+  \item ``mehr als $k$'' $\Rightarrow P(X>k)$
+  \item ``hoechstens $k$'' $\Rightarrow P(X\le k)$
+  \item ``weniger als $k$'' $\Rightarrow P(X<k)$
+  \item ``genau $k$'' $\Rightarrow P(X=k)$
+  \item ``zwischen $a$ und $b$'' $\Rightarrow P(a\le X\le b)$ oder Aufgabe genau lesen
+\end{itemize}
+
+\section*{16. Reicht das?}
+\begin{itemize}
+  \item Fuer die bisher gesehenen Klausurtypen: ziemlich weit ja.
+  \item Nicht garantiert: jede Spezialfrage oder jede Theorie-/Begruendungsfrage.
+  \item Wenn du haengst: erst Keyword suchen, dann passende Schublade, dann Formel.
+\end{itemize}
+
+\section*{17. Notation, die Punkte bringt}
 \begin{itemize}
   \item Ereignisse als Mengen notieren, nicht nur in Worten
   \item Zufallsvariable benennen: ``Sei $X$ = Anzahl der Treffer''
@@ -741,7 +784,7 @@ n\ge \frac{1}{4\delta\varepsilon^2}
   \item am Ende Antwortsatz mit Kontext
 \end{itemize}
 
-\section*{17. Symbollegende}
+\section*{18. Symbollegende}
 \begin{itemize}
   \item $\omega$: einzelnes Ergebnis eines Zufallsexperiments
   \item $\Omega$: Ergebnismenge, also alle moeglichen Ergebnisse
