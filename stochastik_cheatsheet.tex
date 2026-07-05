@@ -1,0 +1,4489 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,margin=1.8cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\setlist[itemize]{leftmargin=1.6em, itemsep=0.2em, topsep=0.35em}
+\setlist[enumerate]{leftmargin=1.8em, itemsep=0.2em, topsep=0.35em}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+
+\title{Stochastik Cheatsheet}
+\author{laufende Sammlung fuer die Klausur}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\bigskip
+
+\section{Kapitel 1.1: Zufallsexperimente und Wahrscheinlichkeitsraeume}
+
+\subsection{Grundnotation}
+\begin{itemize}
+  \item $\Omega$: Ergebnismenge, also die Menge aller moeglichen Ergebnisse.
+  \item $\omega \in \Omega$: ein einzelnes Ergebnis.
+  \item $A, B, C \subseteq \Omega$: Ereignisse.
+  \item $\emptyset$: unmoegliches Ereignis.
+  \item $\Omega$: sicheres Ereignis.
+  \item $\{\omega\}$: Elementarereignis zum Ergebnis $\omega$.
+  \item $\overline{A} = \Omega \setminus A$: Gegenereignis zu $A$.
+  \item $A \cup B$: ``$A$ oder $B$''.
+  \item $A \cap B$: ``$A$ und $B$''.
+  \item $A \setminus B$: ``$A$ ohne $B$''.
+\end{itemize}
+
+\textbf{Merke:}
+Ein Ergebnis ist ein einzelner Ausgang. Ein Ereignis ist eine Menge von Ergebnissen. Ein Elementarereignis ist ein Ereignis mit genau einem Ergebnis.
+
+\subsection{Zufallsexperiment}
+Ein Vorgang ist ein Zufallsexperiment, wenn:
+\begin{itemize}
+  \item er unter gleichen Bedingungen wiederholbar ist,
+  \item er ein Ergebnis liefert,
+  \item die moeglichen Ergebnisse vorher feststehen,
+  \item das konkrete Ergebnis nicht sicher vorhersagbar ist.
+\end{itemize}
+
+\subsection{Ereignisse sauber notieren}
+Beispiel beim Wuerfeln mit $\Omega = \{1,2,3,4,5,6\}$:
+\begin{itemize}
+  \item gerade Zahl: $A = \{2,4,6\}$
+  \item hoechstens $4$: $B = \{1,2,3,4\}$
+  \item gerade und hoechstens $4$: $A \cap B = \{2,4\}$
+  \item gerade oder hoechstens $4$: $A \cup B = \{1,2,3,4,6\}$
+\end{itemize}
+
+\textbf{Merke:}
+Text immer zuerst in Mengen uebersetzen, dann rechnen.
+
+\subsection{Wahrscheinlichkeitsmass}
+Ein Wahrscheinlichkeitsmass ist eine Abbildung
+\[
+P : \mathcal{P}(\Omega) \to [0,1]
+\]
+mit:
+\begin{align*}
+P(\Omega) &= 1, \\
+P\left(\bigcup_{i=1}^{\infty} A_i\right) &= \sum_{i=1}^{\infty} P(A_i)
+\quad \text{fuer paarweise disjunkte } A_1, A_2, \dots
+\end{align*}
+
+\textbf{Wichtige Rechenregeln}
+\begin{align*}
+P(\emptyset) &= 0 \\
+P(\overline{A}) &= 1 - P(A) \\
+A \subseteq B &\Rightarrow P(A) \leq P(B) \\
+P(A \setminus B) &= P(A) - P(A \cap B) \\
+P(A \cup B) &= P(A) + P(B) - P(A \cap B)
+\end{align*}
+
+Falls $A \cap B = \emptyset$, also $A$ und $B$ disjunkt sind:
+\[
+P(A \cup B) = P(A) + P(B)
+\]
+
+\textbf{Merke:}
+Bei ``oder'' fast immer zuerst an
+\[
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+\]
+denken. Nur wenn die Ereignisse disjunkt sind, faellt der Schnittterm weg.
+
+\subsection{Laplace-Experiment}
+Wenn alle Elementarergebnisse gleich wahrscheinlich sind, gilt:
+\[
+P(A) = \frac{|A|}{|\Omega|}
+\]
+
+\textbf{Bedeutung:}
+\begin{itemize}
+  \item $|A|$: Anzahl guenstiger Ergebnisse
+  \item $|\Omega|$: Anzahl aller moeglichen Ergebnisse
+\end{itemize}
+
+Beispiel fairer Wuerfel:
+\[
+\Omega = \{1,2,3,4,5,6\}, \quad A = \{2,4,6\}, \quad P(A) = \frac{3}{6} = \frac{1}{2}
+\]
+
+\textbf{Merke:}
+Laplace nur benutzen, wenn wirklich alle Ergebnisse gleich wahrscheinlich sind.
+
+\subsection{Wahrscheinlichkeitsfunktion}
+Die Wahrscheinlichkeitsfunktion ordnet jedem einzelnen Ergebnis seine Wahrscheinlichkeit zu:
+\[
+p : \Omega \to [0,1], \quad p(\omega) = P(\{\omega\})
+\]
+
+Fuer ein Ereignis $A \subseteq \Omega$ gilt dann:
+\[
+P(A) = \sum_{\omega \in A} p(\omega)
+\]
+
+Damit $p$ eine Wahrscheinlichkeitsfunktion ist, muss gelten:
+\begin{align*}
+p(\omega) &\geq 0 \quad \text{fuer alle } \omega \in \Omega \\
+\sum_{\omega \in \Omega} p(\omega) &= 1
+\end{align*}
+
+\textbf{Merke:}
+Ist $p$ gegeben, dann werden Ereigniswahrscheinlichkeiten durch Aufsummieren der passenden Einzelwahrscheinlichkeiten berechnet.
+
+\subsection{Standardmuster fuer Aufgaben}
+\textbf{1. Pruefen, ob $p$ eine Wahrscheinlichkeitsfunktion ist}
+\begin{enumerate}
+  \item Zeige $p(\omega) \geq 0$ fuer alle $\omega$.
+  \item Zeige $\sum_{\omega \in \Omega} p(\omega) = 1$.
+\end{enumerate}
+
+\textbf{2. Konstante $c$ bestimmen}
+
+Wenn $p(i) = c \cdot f(i)$ gegeben ist, dann:
+\[
+\sum_i p(i) = 1
+\quad \Rightarrow \quad
+c \sum_i f(i) = 1
+\quad \Rightarrow \quad
+c = \frac{1}{\sum_i f(i)}
+\]
+
+\textbf{3. Wahrscheinlichkeit eines Ereignisses berechnen}
+
+Wenn $A \subseteq \Omega$, dann:
+\[
+P(A) = \sum_{\omega \in A} p(\omega)
+\]
+
+\textbf{4. Formulierungen wie ``mindestens'', ``hoechstens'', ``mehr als''}
+
+Oft ist das Gegenereignis einfacher.
+
+Beispiel:
+``10 oder mehr Versuche bis zur ersten 6'' bedeutet:
+in den ersten 9 Versuchen faellt keine 6. Also
+\[
+P(X \geq 10) = \left(\frac{5}{6}\right)^9
+\]
+
+\subsection{Notation fuer saubere Klausurloesungen}
+Saubere Standardsaetze:
+\begin{itemize}
+  \item ``Sei $\Omega = \{\dots\}$ die Ergebnismenge.''
+  \item ``Sei $A = \{\dots\}$ das Ereignis \dots''
+  \item ``Da $A \cap B = \emptyset$, gilt \dots''
+  \item ``Mit der Additionsformel folgt \dots''
+  \item ``Da es sich um ein Laplace-Experiment handelt, gilt \dots''
+  \item ``Fuer die Wahrscheinlichkeitsfunktion muss $\sum_{\omega \in \Omega} p(\omega) = 1$ gelten.''
+\end{itemize}
+
+\textbf{Merke:}
+Nicht nur Ergebnis hinschreiben, sondern kurz den passenden Ansatz mit notieren. Das gibt eher Punkte.
+
+\subsection{Direkt nuetzlich fuer die Aufgaben des Blatts}
+\textbf{Muenzwurf mit Rand}
+\[
+\Omega = \{K, Z, R\}, \quad p(K) = \frac{1}{2}, \quad p(Z) = \frac{1}{2}, \quad p(R) = 0
+\]
+
+\textbf{Wichtig:}
+Ein Ergebnis darf in $\Omega$ enthalten sein, auch wenn seine Wahrscheinlichkeit $0$ ist.
+
+\textbf{Konstante Wahrscheinlichkeitsfunktion auf abz\"ahlbar unendlichem $\Omega$}
+
+Unmoeglich:
+\begin{itemize}
+  \item bei $p(\omega) = c > 0$ waere $\sum p(\omega) = \infty$,
+  \item bei $c = 0$ waere $\sum p(\omega) = 0$.
+\end{itemize}
+
+Also gibt es auf einer abz\"ahlbar unendlichen Ergebnismenge keine konstante Wahrscheinlichkeitsfunktion.
+
+\textbf{Wuerfeln bis zur ersten 6}
+
+Falls $X$ die Anzahl der Versuche bis zur ersten 6 ist:
+\[
+P(X = k) = \left(\frac{5}{6}\right)^{k-1} \cdot \frac{1}{6}
+\quad \text{fuer } k \in \mathbb{N}
+\]
+
+\textbf{Merke:}
+Erst $k-1$ mal keine 6, dann einmal 6.
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item Erst $\Omega$ aufschreiben, dann Ereignisse definieren, dann rechnen.
+  \item ``oder'' ist Vereinigung, ``und'' ist Schnitt.
+  \item Gegenereignisse sparen oft Rechenarbeit.
+  \item Laplace nur bei Gleichverteilung.
+  \item Bei gegebener Wahrscheinlichkeitsfunktion immer ueber Summen arbeiten.
+  \item Wahrscheinlichkeit $0$ bedeutet nicht automatisch ``unmoeglich'' in jedem allgemeinen Modell.
+  \item Wahrscheinlichkeit $1$ bedeutet nicht automatisch ``sicher'' im logischen Sinn.
+\end{itemize}
+
+\section{Weitere Kapitel}
+Hier kommen die naechsten Uebungsblaetter rein. Ich wuerde pro Kapitel immer diese Struktur beibehalten:
+\begin{itemize}
+  \item Grundbegriffe
+  \item wichtigste Formeln
+  \item Standard-Notation
+  \item Aufgabentypen und Merksaetze
+  \item typische Fallen
+\end{itemize}
+
+\section{Kapitel 1.2: Bernoulli- und Laplace-Experimente; Kombinatorik}
+
+\subsection{Bernoulli-Experiment}
+Ein Bernoulli-Experiment ist ein Zufallsexperiment mit genau zwei moeglichen Ergebnissen.
+Typisch:
+\[
+\Omega = \{0,1\}
+\]
+
+Meist bezeichnet man:
+\[
+P(1) = p, \qquad P(0) = q = 1-p
+\]
+oder umgekehrt. Das muss in der Aufgabe klar festgelegt werden.
+
+\textbf{Typische Deutung}
+\begin{itemize}
+  \item $1$ = Treffer, Erfolg, defekt, Kopf, ja
+  \item $0$ = Niete, Misserfolg, in Ordnung, Zahl, nein
+\end{itemize}
+
+\textbf{Merke:}
+Bei Bernoulli immer zuerst klar sagen, was als ``Erfolg'' codiert wird. Sonst baust du spaeter leicht $p$ und $q$ falsch ein.
+
+\subsection{Laplace-Experiment}
+Ein Laplace-Experiment liegt vor, wenn:
+\begin{itemize}
+  \item $\Omega$ endlich ist und
+  \item alle Elementarergebnisse gleich wahrscheinlich sind.
+\end{itemize}
+
+Dann gilt:
+\[
+P(A) = \frac{|A|}{|\Omega|}
+\]
+
+\textbf{Typische Beispiele}
+\begin{itemize}
+  \item faire Muenze
+  \item fairer Wuerfel
+  \item Lottoziehungen
+  \item Pokerblaetter
+  \item zufaellige Reihenfolgen / Permutationen
+\end{itemize}
+
+\textbf{Merke:}
+Bei Laplace-Aufgaben brauchst du fast immer nur:
+\begin{enumerate}
+  \item Anzahl aller moeglichen Ergebnisse
+  \item Anzahl der guenstigen Ergebnisse
+\end{enumerate}
+Dann einfach Quotient bilden.
+
+\subsection{Kombinatorik: die wichtigste Schubladenregel}
+Bevor du eine Formel benutzt, frage immer:
+\begin{enumerate}
+  \item Wird eine \textbf{Reihenfolge} beachtet?
+  \item Sind \textbf{Wiederholungen} erlaubt?
+\end{enumerate}
+
+Dann landet die Aufgabe in genau einer von vier Schubladen:
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+ & ohne Wiederholung & mit Wiederholung \\
+\hline
+Reihenfolge wichtig & Variation & Variation \\
+\hline
+Reihenfolge egal & Kombination & Kombination mit Wiederholung \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Zusaetzlich:} Wenn alle $n$ Elemente angeordnet werden, spricht man von einer Permutation.
+
+\subsection{Permutationen}
+\textbf{1. Alle Elemente verschieden}
+
+Anzahl aller Anordnungen von $n$ verschiedenen Elementen:
+\[
+\operatorname{Perm}(n) = n!
+\]
+
+\textbf{2. Elemente in Klassen, innerhalb der Klasse nicht unterscheidbar}
+
+Sind $n$ Elemente in Klassen mit Groessen $k_1, k_2, \dots, k_r$ eingeteilt, dann:
+\[
+\operatorname{Perm}(n;k_1,\dots,k_r) = \frac{n!}{k_1!\cdot k_2!\cdots k_r!}
+\]
+mit
+\[
+k_1 + k_2 + \dots + k_r = n
+\]
+
+\textbf{Typische Beispiele}
+\begin{itemize}
+  \item Wortanordnungen wie \texttt{MISSISSIPPI}
+  \item Sitzordnungen nach Klassen wie Mann/Frau
+\end{itemize}
+
+\textbf{Merke:}
+Wenn gleiche Objekte mehrfach vorkommen, erst $n!$ denken und dann durch die inneren Vertauschungen teilen.
+
+\subsection{Variationen: Auswahl mit Reihenfolge}
+\textbf{1. Ohne Wiederholung}
+
+Anzahl geordneter $k$-Tupel aus $n$ Elementen:
+\[
+V(n,k) = n\cdot(n-1)\cdot \dots \cdot (n-k+1) = \frac{n!}{(n-k)!}
+\qquad (k \leq n)
+\]
+
+\textbf{Deutung:}
+Ziehen ohne Zuruecklegen, Reihenfolge wichtig.
+
+\textbf{2. Mit Wiederholung}
+
+Anzahl geordneter $k$-Tupel aus $n$ Elementen:
+\[
+V(n,k) = n^k
+\]
+
+\textbf{Deutung:}
+Ziehen mit Zuruecklegen, Reihenfolge wichtig.
+
+\textbf{Typische Beispiele}
+\begin{itemize}
+  \item PIN-Codes
+  \item Folgen von Wuerfelergebnissen
+  \item Folgen von Geburtstagen
+\end{itemize}
+
+\subsection{Kombinationen: Auswahl ohne Reihenfolge}
+\textbf{1. Ohne Wiederholung}
+
+Anzahl $k$-elementiger Teilmengen aus $n$ Elementen:
+\[
+C(n,k) = \binom{n}{k} = \frac{n!}{k!(n-k)!}
+\qquad (k \leq n)
+\]
+
+\textbf{Deutung:}
+Ziehen ohne Zuruecklegen, Reihenfolge egal.
+
+\textbf{Typische Beispiele}
+\begin{itemize}
+  \item Lotto ``6 aus 49''
+  \item Pokerblatt mit 5 Karten
+  \item Spiele ``jede Mannschaft gegen jede andere''
+\end{itemize}
+
+\textbf{2. Mit Wiederholung}
+
+Anzahl $k$-elementiger Multimengen aus $n$ Elementen:
+\[
+C(n,k) = \binom{n-1+k}{k}
+\]
+
+\textbf{Deutung:}
+Ziehen mit Zuruecklegen, Reihenfolge egal.
+
+\textbf{Typische Beispiele}
+\begin{itemize}
+  \item Stimmverteilungen
+  \item Auswahl mit Mehrfachnennungen
+\end{itemize}
+
+\subsection{Potenzmenge}
+Fuer jede endliche Menge $M$ gilt:
+\[
+|\mathcal{P}(M)| = 2^{|M|}
+\]
+
+\textbf{Merke:}
+Jedes Element ist entweder drin oder nicht drin. Also pro Element genau $2$ Moeglichkeiten.
+
+\subsection{Wichtige Standardformeln auf einen Blick}
+\begin{align*}
+\operatorname{Perm}(n) &= n! \\
+\operatorname{Perm}(n;k_1,\dots,k_r) &= \frac{n!}{k_1!\cdots k_r!} \\
+V(n,k) \text{ ohne Wdh.} &= \frac{n!}{(n-k)!} \\
+V(n,k) \text{ mit Wdh.} &= n^k \\
+C(n,k) \text{ ohne Wdh.} &= \binom{n}{k} = \frac{n!}{k!(n-k)!} \\
+C(n,k) \text{ mit Wdh.} &= \binom{n-1+k}{k}
+\end{align*}
+
+\subsection{Wann nehme ich was?}
+\begin{itemize}
+  \item \textbf{Permutation:} alle Objekte werden angeordnet.
+  \item \textbf{Variation:} nur $k$ aus $n$, Reihenfolge wichtig.
+  \item \textbf{Kombination:} nur $k$ aus $n$, Reihenfolge egal.
+  \item \textbf{Mit Wiederholung:} gleiches Element darf mehrfach vorkommen.
+  \item \textbf{Ohne Wiederholung:} ein gezogenes Element ist danach weg.
+\end{itemize}
+
+\textbf{Klausurregel:}
+Wenn du unsicher bist, schreib dir ein Mini-Beispiel mit $n=3$, $k=2$ hin und ueberlege, ob z.B. $(a,b)$ und $(b,a)$ verschieden sein sollen.
+
+\subsection{Laplace-Aufgaben mit Kombinatorik}
+Oft gilt:
+\[
+P(A) = \frac{|A|}{|\Omega|}
+\]
+aber diesmal werden $|A|$ und $|\Omega|$ mit Kombinatorik bestimmt.
+
+\textbf{Lotto ``6 aus 49''}
+\[
+|\Omega| = \binom{49}{6}
+\]
+
+Fuer ``genau $4$ Richtige'':
+\[
+|A| = \binom{6}{4}\binom{43}{2}
+\]
+also
+\[
+P(\text{genau 4 Richtige}) = \frac{\binom{6}{4}\binom{43}{2}}{\binom{49}{6}}
+\]
+
+\textbf{Merke:}
+``genau $k$ Richtige'' bedeutet fast immer:
+\[
+\frac{\binom{\text{eigene Trefferzahlen}}{k}\binom{\text{restliche falsche}}{\text{Rest}}}{\binom{\text{gesamt}}{\text{Ziehungszahl}}}
+\]
+
+\subsection{Geburtstagsparadoxon}
+Gesucht:
+\[
+A = \{\text{mindestens zwei Personen haben am gleichen Tag Geburtstag}\}
+\]
+
+Leichter ist das Gegenereignis:
+\[
+\overline{A} = \{\text{alle Geburtstage verschieden}\}
+\]
+
+Fuer $k \leq 365$ gilt:
+\[
+P(A) = 1 - P(\overline{A})
+      = 1 - \frac{V(365,k)}{365^k}
+      = 1 - \frac{365\cdot 364 \cdot \dots \cdot (365-k+1)}{365^k}
+\]
+
+\textbf{Merke:}
+Bei ``mindestens zwei gleich'' fast immer ueber das Gegenereignis ``alle verschieden'' gehen.
+
+\subsection{Ein- und Ausschlussprinzip}
+Fuer endliche Mengen:
+\[
+|A \cup B| = |A| + |B| - |A \cap B|
+\]
+
+Fuer drei Mengen:
+\[
+|A \cup B \cup C|
+= |A| + |B| + |C|
+- |A \cap B| - |A \cap C| - |B \cap C|
++ |A \cap B \cap C|
+\]
+
+Allgemein: abwechselnd addieren und subtrahieren.
+
+\textbf{Analog fuer Wahrscheinlichkeiten}
+\[
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+\]
+
+\[
+P(A \cup B \cup C)
+= P(A) + P(B) + P(C)
+- P(A \cap B) - P(A \cap C) - P(B \cap C)
++ P(A \cap B \cap C)
+\]
+
+\textbf{Merke:}
+Wenn nach ``mindestens eines der Ereignisse tritt ein'' gefragt wird und die Ereignisse sich ueberlappen koennen, ist das Ein- und Ausschlussprinzip oft die richtige Waffe.
+
+\subsection{Typische Aufgabentypen aus dem Blatt}
+\textbf{Multiple Choice mit Raten}
+
+Pro Frage:
+\[
+p = \frac{1}{3}, \qquad q = \frac{2}{3}
+\]
+
+Fuer genau $k$ richtige bei $10$ Fragen:
+\[
+\binom{10}{k}\left(\frac{1}{3}\right)^k\left(\frac{2}{3}\right)^{10-k}
+\]
+
+Fuer ``mindestens 8 richtig'':
+\[
+\sum_{k=8}^{10} \binom{10}{k}\left(\frac{1}{3}\right)^k\left(\frac{2}{3}\right)^{10-k}
+\]
+
+\textbf{Personen in Reihenfolge}
+
+Wenn alle Reihenfolgen gleich wahrscheinlich sind:
+\[
+|\Omega| = n!
+\]
+
+Bei guenstigen Faellen oft mit ``Blockbildung'' arbeiten:
+z.B. Ehepaar nebeneinander $\Rightarrow$ Paar als ein Block zaehlen.
+
+\textbf{Mehrfach wuerfeln und alle Ergebnisse verschieden}
+
+Bei $k$ Wuerfen mit fairem Wuerfel:
+\[
+|\Omega| = 6^k
+\]
+
+Falls alle $k$ Ergebnisse verschieden sein sollen:
+\[
+|A| = V(6,k) = \frac{6!}{(6-k)!}
+\]
+
+also
+\[
+P(A) = \frac{V(6,k)}{6^k}
+\]
+
+\subsection{Notation fuer saubere Loesungen}
+Gute Standardsaetze:
+\begin{itemize}
+  \item ``Da die Reihenfolge relevant ist, betrachten wir Variationen.''
+  \item ``Da ohne Zuruecklegen gezogen wird, sind keine Wiederholungen moeglich.''
+  \item ``Da nur die Auswahl, nicht aber die Reihenfolge zaehlt, verwenden wir Kombinationen.''
+  \item ``Da es sich um ein Laplace-Experiment handelt, gilt $P(A)=|A|/|\Omega|$. ''
+  \item ``Wir berechnen zunaechst die Anzahl aller moeglichen und dann die Anzahl der guenstigen Ergebnisse.''
+  \item ``Es ist einfacher, das Gegenereignis zu betrachten.''
+\end{itemize}
+
+\subsection{Typische Fallen}
+\begin{itemize}
+  \item Reihenfolge versehentlich mitgezaehlt, obwohl sie egal ist.
+  \item Reihenfolge vergessen, obwohl sie wichtig ist.
+  \item Mit/ohne Wiederholung verwechselt.
+  \item Bei Laplace direkt Formeln hingeschrieben, ohne $|\Omega|$ und $|A|$ sauber zu definieren.
+  \item ``mindestens eins'' nicht ueber Gegenereignis oder Ein-/Ausschlussprinzip gerechnet.
+  \item Lotto/Poker als Tupel statt als Mengen modelliert.
+\end{itemize}
+
+\section{Kapitel 1.3: Zufallsvariablen und zufaellige Elemente}
+
+\subsection{Grundidee}
+Oft interessiert beim Zufallsexperiment nicht das rohe Ergebnis $\omega \in \Omega$, sondern nur ein bestimmtes Merkmal davon.
+
+\textbf{Beispiele}
+\begin{itemize}
+  \item Bei zwei Wuerfeln interessiert nur die Summe.
+  \item Bei zwei Wuerfeln interessiert nur das Produkt.
+  \item Bei zwei Kindern interessiert nur die Geschlechterzusammensetzung.
+  \item Bei drei nicht unterscheidbaren Wuerfeln interessiert nur die Multimenge der Augenzahlen.
+\end{itemize}
+
+\textbf{Merke:}
+Man startet mit einem sauberen Wahrscheinlichkeitsraum $(\Omega,P)$ und bildet daraus ueber eine Abbildung $X$ ein neues Modell fuer das interessierende Merkmal.
+
+\subsection{Zufallsvariable}
+Eine Zufallsvariable ist eine Abbildung
+\[
+X : \Omega \to \mathbb{R}
+\]
+
+\textbf{Bedeutung:}
+\begin{itemize}
+  \item jedem Ergebnis $\omega$ wird ein Zahlenwert $X(\omega)$ zugeordnet,
+  \item dieser Zahlenwert ist das Merkmal, das uns interessiert.
+\end{itemize}
+
+\textbf{Typische Beispiele}
+\begin{itemize}
+  \item Augensumme zweier Wuerfel
+  \item Augenprodukt zweier Wuerfel
+  \item Koerpergroesse
+  \item Studiensemester
+\end{itemize}
+
+\subsection{Verteilung von $X$ / Bildmass}
+Aus $X$ entsteht eine neue Verteilung auf der Wertemenge von $X$:
+\[
+P_X(A) := P(X \in A)
+\]
+
+gleichbedeutend mit
+\[
+P_X(A) = P(X^{-1}(A))
+\]
+
+Dabei ist
+\[
+X^{-1}(A) = \{\omega \in \Omega \mid X(\omega) \in A\}
+\]
+das Urbild von $A$.
+
+\textbf{Wichtige Schreibweisen}
+\begin{align*}
+\{X \in A\} &= X^{-1}(A) \\
+\{X = a\} &= \{\omega \in \Omega \mid X(\omega)=a\} \\
+\{X \le a\} &= \{\omega \in \Omega \mid X(\omega)\le a\} \\
+\{X \ge a\} &= \{\omega \in \Omega \mid X(\omega)\ge a\}
+\end{align*}
+
+\textbf{Merke:}
+Wenn du eine Wahrscheinlichkeit fuer die Zufallsvariable suchst, rechnest du immer im urspruenglichen Raum $\Omega$ ueber das passende Urbild.
+
+\subsection{Standardrezept fuer Aufgaben}
+\begin{enumerate}
+  \item Urspruenglichen Wahrscheinlichkeitsraum $(\Omega,P)$ angeben.
+  \item Zufallsvariable $X$ definieren.
+  \item Gesuchtes Ereignis als $\{X \in A\}$ oder $\{X=a\}$ schreiben.
+  \item Urbild in $\Omega$ bestimmen.
+  \item Wahrscheinlichkeit dort ausrechnen.
+\end{enumerate}
+
+\subsection{Beispiel: Augensumme zweier fairer Wuerfel}
+Ursprungsraum:
+\[
+\Omega = \{1,2,3,4,5,6\}^2
+\]
+mit Gleichverteilung.
+
+Zufallsvariable:
+\[
+X(i,j)=i+j
+\]
+
+Wertemenge:
+\[
+\Omega_X=\{2,3,\dots,12\}
+\]
+
+Beispiel fuer $A=\{2,3\}$:
+\[
+X^{-1}(A)=\{(1,1),(1,2),(2,1)\}
+\]
+
+also
+\[
+P_X(A)=P(X\in A)=\frac{3}{36}=\frac{1}{12}
+\]
+
+\textbf{Merke:}
+Die Summe ist nicht gleichverteilt auf $\{2,\dots,12\}$, weil verschiedene Summen unterschiedlich viele Urbilder haben.
+
+\subsection{Beispiel: Augenprodukt zweier fairer Wuerfel}
+Zufallsvariable:
+\[
+X(i,j)=i\cdot j
+\]
+
+Gesucht z.B.:
+\[
+A=\{\text{Produkt ist durch } 6 \text{ teilbar}\}
+\]
+
+Dann:
+\[
+P_X(A)=P(X\in A)
+\]
+
+Vorgehen:
+\begin{itemize}
+  \item alle Paare $(i,j)$ suchen, fuer die $i\cdot j$ durch $6$ teilbar ist,
+  \item diese Paare zaehlen,
+  \item durch $36$ teilen.
+\end{itemize}
+
+Im Blatt:
+\[
+P(X\in A)=\frac{15}{36}=\frac{5}{12}
+\]
+
+\subsection{Zufaelliges Element}
+Allgemeiner als eine Zufallsvariable:
+\[
+X : \Omega \to \Omega'
+\]
+wobei $\Omega'$ irgendeine Menge sein darf.
+
+Dann heisst $X$ ein zufaelliges Element.
+
+\textbf{Unterschied}
+\begin{itemize}
+  \item Zufallsvariable: Zielmenge ist numerisch.
+  \item Zufaelliges Element: Zielmenge kann auch aus Mengen, Multimengen, Kartenblaettern, Worten usw. bestehen.
+\end{itemize}
+
+\textbf{Beziehung}
+\begin{itemize}
+  \item Jede Zufallsvariable ist ein zufaelliges Element.
+  \item Nicht jedes zufaellige Element ist eine Zufallsvariable.
+\end{itemize}
+
+\subsection{Beispiel: drei nicht unterscheidbare Wuerfel}
+Wenn die Wuerfel nicht unterscheidbar sind, ist ein Tupel wie $(3,2,6)$ kein gutes Endmodell, weil die Reihenfolge bedeutungslos ist.
+
+Besser:
+\begin{itemize}
+  \item zuerst sauberes Modell mit unterscheidbaren Wuerfeln:
+  \[
+  \Omega=\{1,2,3,4,5,6\}^3
+  \]
+  mit Gleichverteilung,
+  \item dann Abbildung auf die passende Struktur:
+  \[
+  X(i,j,k)=\text{Multimenge } \{i,j,k\}
+  \]
+\end{itemize}
+
+So bekommt man die richtige Verteilung auf den Multimengen.
+
+Beispiel:
+\[
+X(i,j,k)=\{2,2,3\}
+\]
+ist genau fuer
+\[
+(2,2,3), (2,3,2), (3,2,2)
+\]
+erfuellt. Also:
+\[
+P(X=\{2,2,3\})=\frac{3}{6^3}=\frac{3}{216}=\frac{1}{72}
+\]
+
+\textbf{Merke:}
+Wenn du von einem feineren Modell auf ein groberes Modell abbildest, ist die neue Verteilung meistens nicht gleichverteilt.
+
+\subsection{Extrem wichtige Klausurfalle}
+Nur weil die neue Ergebnismenge klein und symmetrisch aussieht, darfst du nicht automatisch Gleichverteilung annehmen.
+
+\textbf{Beispiel Kinder-Geschlechter}
+
+Feines Modell:
+\[
+\Omega=\{(0,0),(1,0),(0,1),(1,1)\}
+\]
+mit Gleichverteilung, etwa
+\[
+1=\text{Maedchen}, \qquad 0=\text{Junge}
+\]
+
+Ereignis ``mindestens ein Junge'':
+\[
+S=\{(0,0),(1,0),(0,1)\}
+\]
+also
+\[
+P(S)=\frac{3}{4}
+\]
+
+Grobes Modell ueber Multimengen:
+\[
+\{0,0\}, \{0,1\}, \{1,1\}
+\]
+
+Diese drei Ergebnisse sind nicht gleich wahrscheinlich, denn
+\begin{align*}
+P(\{0,0\}) &= \frac{1}{4} \\
+P(\{0,1\}) &= \frac{2}{4}=\frac{1}{2} \\
+P(\{1,1\}) &= \frac{1}{4}
+\end{align*}
+
+Deshalb ist
+\[
+P(S)=P(\{0,0\})+P(\{0,1\})=\frac{1}{4}+\frac{1}{2}=\frac{3}{4}
+\]
+und nicht $\frac{2}{3}$.
+
+\textbf{Merke:}
+Wenn mehrere Ergebnisse des feinen Modells auf dasselbe grobe Ergebnis fallen, dann bekommt dieses grobe Ergebnis mehr Gewicht.
+
+\subsection{Chevalier-de-Mere-Typ-Aufgaben}
+Bei drei Wuerfeln und Summen wie $11$ oder $12$ reicht es nicht, nur Zerlegungen als Summen zu vergleichen.
+
+Warum?
+\begin{itemize}
+  \item Dieselbe Zerlegung kann unterschiedlich viele geordnete Tupel erzeugen.
+  \item Beispiel: $5+5+1$ liefert weniger verschiedene Tupel als $6+4+1$.
+\end{itemize}
+
+\textbf{Klausurregel:}
+Wenn das Grundmodell geordnete Tupel sind, musst du auch die Anzahl der geordneten Tupel zaehlen.
+
+\subsection{Wann benutze ich Zufallsvariable vs. direktes Ereignis?}
+\begin{itemize}
+  \item Direktes Ereignis: wenn im Originalraum sowieso leicht gezaehlt werden kann.
+  \item Zufallsvariable: wenn sich die Frage natuerlich ueber ein Merkmal wie Summe, Produkt, Anzahl, Gewicht, Groesse formulieren laesst.
+\end{itemize}
+
+\textbf{Praktisch:}
+In Rechnungen wird trotzdem meist wieder im Originalraum ueber das Urbild gezaehlt.
+
+\subsection{Notation fuer saubere Loesungen}
+Gute Standardsaetze:
+\begin{itemize}
+  \item ``Wir definieren die Zufallsvariable $X:\Omega \to \mathbb{R}$ durch $X(\omega)=\dots$. ''
+  \item ``Gesucht ist $P(X \in A)$. ''
+  \item ``Dazu bestimmen wir zunaechst das Urbild $X^{-1}(A)$. ''
+  \item ``Da auf $\Omega$ Gleichverteilung herrscht, gilt $P(X \in A)=|X^{-1}(A)|/|\Omega|$. ''
+  \item ``Die grobe Ergebnismenge ist nicht gleichverteilt; die Verteilung muss aus dem Ursprungsraum transportiert werden.''
+\end{itemize}
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item Zufallsvariable = numerisches Merkmal eines Zufallsexperiments.
+  \item Zufaelliges Element = allgemeiner; Zielmenge muss nicht numerisch sein.
+  \item Wahrscheinlichkeiten von $X$ immer ueber Urbilder im urspruenglichen Raum berechnen.
+  \item Bildverteilungen sind oft nicht gleichverteilt, auch wenn der Ursprungsraum gleichverteilt ist.
+  \item Bei vergroebberten Modellen entscheidet die Anzahl der Urbilder ueber die Wahrscheinlichkeiten.
+  \item Zerlegungen zaehlen reicht nicht, wenn das Grundmodell geordnete Tupel hat.
+\end{itemize}
+
+\section{Kapitel 1.4: Bedingte Wahrscheinlichkeiten}
+
+\subsection{Grundidee}
+Eine bedingte Wahrscheinlichkeit beschreibt, wie sich Wahrscheinlichkeiten aendern, wenn man zusaetzliche Information kennt.
+
+\textbf{Beispiel}
+\begin{itemize}
+  \item $A$ = ``Augenzahl ist gerade''
+  \item $B$ = ``Augenzahl ist mindestens 4''
+\end{itemize}
+
+Ohne Zusatzwissen gilt:
+\[
+P(A)=\frac{3}{6}=\frac{1}{2}
+\]
+
+Wenn aber bekannt ist, dass $B$ eingetreten ist, dann bleibt nur
+\[
+B=\{4,5,6\}
+\]
+und davon sind fuer $A$ guenstig:
+\[
+A \cap B=\{4,6\}
+\]
+
+Also:
+\[
+P(A\mid B)=\frac{2}{3}
+\]
+
+\subsection{Definition}
+Fuer Ereignisse $A,B$ mit $P(B)>0$ gilt:
+\[
+P(A\mid B)=\frac{P(A \cap B)}{P(B)}
+\]
+
+\textbf{Bedeutung:}
+``Wahrscheinlichkeit von $A$ unter der Bedingung, dass $B$ bereits eingetreten ist.''
+
+\textbf{Merke:}
+Im Nenner steht immer die Bedingung.
+
+\subsection{Wichtige Umformung}
+Aus der Definition folgt direkt:
+\[
+P(A \cap B)=P(A\mid B)\cdot P(B)
+\]
+
+und genauso
+\[
+P(A \cap B)=P(B\mid A)\cdot P(A)
+\]
+
+Das ist der \textbf{Multiplikationssatz}.
+
+\subsection{Multiplikationssatz}
+Fuer zwei Ereignisse:
+\[
+P(A \cap B)=P(A\mid B)\cdot P(B)=P(B\mid A)\cdot P(A)
+\]
+
+Fuer drei Ereignisse:
+\[
+P(A_1 \cap A_2 \cap A_3)
+=P(A_3\mid A_1 \cap A_2)\cdot P(A_2\mid A_1)\cdot P(A_1)
+\]
+
+\textbf{Merke:}
+Bei Pfaden im Baum immer entlang des Pfades multiplizieren.
+
+\subsection{Ereignisbaeume}
+Ein Ereignisbaum ist hilfreich bei mehrstufigen Zufallsexperimenten.
+
+\textbf{Regeln}
+\begin{itemize}
+  \item An jeder Kante steht eine bedingte Wahrscheinlichkeit.
+  \item Die Wahrscheinlichkeit eines vollstaendigen Pfades bekommt man durch Multiplikation.
+  \item Wenn mehrere disjunkte Pfade zum gesuchten Ereignis fuehren, addiert man deren Pfadwahrscheinlichkeiten.
+\end{itemize}
+
+\textbf{Klausurregel}
+\begin{itemize}
+  \item \textbf{entlang eines Pfades:} multiplizieren
+  \item \textbf{zwischen verschiedenen guenstigen Pfaden:} addieren
+\end{itemize}
+
+\subsection{Satz von der totalen Wahrscheinlichkeit}
+Ist
+\[
+\Omega = B_1 \cup B_2 \cup \dots \cup B_n
+\]
+eine Zerlegung in paarweise disjunkte Ereignisse mit $P(B_i)>0$, dann gilt fuer jedes Ereignis $A$:
+\[
+P(A)=\sum_{i=1}^n P(A\mid B_i)\,P(B_i)
+\]
+
+auch geschrieben als
+\[
+P(A)=P(A\cap B_1)+\dots+P(A\cap B_n)
+\]
+
+\textbf{Wann benutzen?}
+\begin{itemize}
+  \item Wenn es mehrere moegliche Ursachen/Faelle $B_i$ gibt.
+  \item Wenn $P(A)$ insgesamt gesucht ist, aber nur die bedingten Wahrscheinlichkeiten $P(A\mid B_i)$ bekannt sind.
+\end{itemize}
+
+\textbf{Merke:}
+Totale Wahrscheinlichkeit = \emph{vorwaerts} rechnen.
+
+\subsection{Satz von Bayes}
+Unter denselben Voraussetzungen gilt fuer $P(A)>0$:
+\[
+P(B_i\mid A)=\frac{P(A\mid B_i)\cdot P(B_i)}{P(A)}
+\]
+
+Mit totaler Wahrscheinlichkeit im Nenner:
+\[
+P(B_i\mid A)=
+\frac{P(A\mid B_i)\cdot P(B_i)}
+\sum_{j=1}^n P(A\mid B_j)\cdot P(B_j)}
+\]
+
+\textbf{Wann benutzen?}
+\begin{itemize}
+  \item Wenn ein Ergebnis $A$ beobachtet wurde
+  \item und du danach wissen willst, wie wahrscheinlich eine bestimmte Ursache $B_i$ war
+\end{itemize}
+
+\textbf{Merke:}
+Bayes = \emph{rueckwaerts} rechnen.
+
+\subsection{Unabhaengigkeit}
+Zwei Ereignisse $A$ und $B$ heissen unabhaengig, wenn
+\[
+P(A \cap B)=P(A)\cdot P(B)
+\]
+
+Falls $P(B)>0$, ist das aequivalent zu
+\[
+P(A\mid B)=P(A)
+\]
+
+\textbf{Bedeutung:}
+Das Wissen, dass $B$ eingetreten ist, aendert die Wahrscheinlichkeit von $A$ nicht.
+
+\textbf{Merke:}
+Unabhaengig heisst \emph{nicht} disjunkt.
+
+\textbf{Typischer Gegencheck}
+\begin{itemize}
+  \item disjunkt mit positiven Wahrscheinlichkeiten $\Rightarrow$ nicht unabhaengig
+  \item unabhaengig $\Rightarrow$ Schnitt ist normalerweise nicht leer
+\end{itemize}
+
+\subsection{Vierfeldertafel}
+Bei Ja/Nein-Situationen mit zwei Merkmalen ist eine Vierfeldertafel oft am saubersten:
+
+\[
+\begin{array}{c|cc|c}
+ & T_0 & T_1 & \text{Summe} \\
+\hline
+K_0 & P(K_0\cap T_0) & P(K_0\cap T_1) & P(K_0) \\
+K_1 & P(K_1\cap T_0) & P(K_1\cap T_1) & P(K_1) \\
+\hline
+\text{Summe} & P(T_0) & P(T_1) & 1
+\end{array}
+\]
+
+\textbf{Merke:}
+Zeilen- und Spaltensummen muessen immer passen. Das ist auch ein guter Fehlercheck.
+
+\subsection{Typische Standardaufgaben}
+\textbf{1. Kanal / Uebertragungsfehler}
+
+Wenn z.B.
+\begin{itemize}
+  \item $B_0$ = ``0 wurde gesendet''
+  \item $B_1$ = ``1 wurde gesendet''
+  \item $A$ = ``0 wurde empfangen''
+\end{itemize}
+
+dann:
+\[
+P(A)=P(A\mid B_0)P(B_0)+P(A\mid B_1)P(B_1)
+\]
+
+\textbf{2. Hersteller / Defekt}
+
+Wenn $B_i$ = ``Produkt stammt von Hersteller $i$'' und $D$ = ``Produkt ist defekt'', dann:
+\[
+P(D)=\sum_i P(D\mid B_i)P(B_i)
+\]
+
+und danach
+\[
+P(B_i\mid D)=\frac{P(D\mid B_i)P(B_i)}{P(D)}
+\]
+
+\textbf{3. Treffer und unbekannte Ursache}
+
+Wenn mehrere Schuetzen unterschiedlich haeufig schiessen und unterschiedlich gut treffen:
+\begin{itemize}
+  \item erst Priors $P(B_i)$ aus den Schussanteilen bestimmen
+  \item dann Trefferwahrscheinlichkeit $P(T\mid B_i)$ einsetzen
+  \item danach Bayes fuer $P(B_i\mid T)$
+\end{itemize}
+
+\textbf{4. Medizinischer Test}
+
+Typische Notation:
+\begin{align*}
+K_1 &= \text{krank} \\
+K_0 &= \text{gesund} \\
+T_1 &= \text{Test positiv} \\
+T_0 &= \text{Test negativ}
+\end{align*}
+
+Dann:
+\begin{align*}
+P(T_1\mid K_1) &= \text{Sensitivitaet} \\
+P(T_0\mid K_0) &= \text{Spezifitaet}
+\end{align*}
+
+Gesucht ist oft:
+\[
+P(K_1\mid T_1)
+=\frac{P(T_1\mid K_1)P(K_1)}
+{P(T_1\mid K_1)P(K_1)+P(T_1\mid K_0)P(K_0)}
+\]
+
+\subsection{Testparadoxon}
+Der Denkfehler:
+\begin{itemize}
+  \item viele verwechseln $P(T_1\mid K_1)$ mit $P(K_1\mid T_1)$
+  \item das ist fast nie dasselbe
+\end{itemize}
+
+\textbf{Merke brutal wichtig:}
+\[
+P(\text{positiv}\mid \text{krank}) \neq P(\text{krank}\mid \text{positiv})
+\]
+
+Der zweite Wert haengt stark von der Grundhaeufigkeit der Krankheit ab:
+\[
+P(K_1)
+\]
+
+Wenn die Krankheit selten ist, koennen trotz gutem Test viele positive Ergebnisse falsch positiv sein.
+
+\subsection{Saubere Standardnotation}
+Gute Standardsaetze:
+\begin{itemize}
+  \item ``Wir betrachten die Zerlegung $\Omega=B_1\cup\dots\cup B_n$. ''
+  \item ``Mit dem Satz von der totalen Wahrscheinlichkeit gilt \dots''
+  \item ``Mit dem Satz von Bayes folgt \dots''
+  \item ``Da $P(B)>0$, ist die bedingte Wahrscheinlichkeit $P(A\mid B)$ definiert.''
+  \item ``Die Pfadwahrscheinlichkeit ergibt sich als Produkt der Kantenwahrscheinlichkeiten.''
+  \item ``Das gesuchte Ereignis setzt sich aus paarweise disjunkten Teilfaellen zusammen; daher addieren wir die Wahrscheinlichkeiten.''
+\end{itemize}
+
+\subsection{Typische Fallen}
+\begin{itemize}
+  \item $P(A\mid B)$ mit $P(B\mid A)$ verwechselt.
+  \item Im Nenner der bedingten Wahrscheinlichkeit das falsche Ereignis genommen.
+  \item Im Baum addiert, obwohl multipliziert werden muss, oder umgekehrt.
+  \item Bayes benutzt, obwohl eigentlich nur totale Wahrscheinlichkeit gebraucht wird.
+  \item Grundwahrscheinlichkeit $P(B_i)$ vergessen.
+  \item Bei Testaufgaben die Grundhaeufigkeit der Krankheit ignoriert.
+  \item Unabhaengigkeit und Disjunktheit verwechselt.
+\end{itemize}
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item Bedingte Wahrscheinlichkeit: $\displaystyle P(A\mid B)=\frac{P(A\cap B)}{P(B)}$.
+  \item Multiplikationssatz: Schnitt = bedingte Wkt. mal Bedingung.
+  \item Totale Wahrscheinlichkeit = mehrere Ursachen vorwaerts aufsummieren.
+  \item Bayes = beobachtetes Ergebnis rueckwaerts auf Ursachen verteilen.
+  \item Im Baum: entlang multiplizieren, ueber disjunkte Pfade addieren.
+  \item Testparadoxon: $P(T_1\mid K_1)$ ist nicht das, was meist gefragt ist.
+\end{itemize}
+
+\section{Kapitel 1.5: Unabhaengigkeit von Ereignissen und Zufallsvariablen}
+
+\subsection{Unabhaengigkeit von Ereignissen}
+Zwei Ereignisse $A,B$ heissen stochastisch unabhaengig genau dann, wenn
+\[
+P(A \cap B)=P(A)\cdot P(B)
+\]
+
+\textbf{Bedeutung:}
+Das Eintreten von $B$ aendert die Wahrscheinlichkeit von $A$ nicht, und umgekehrt.
+
+Falls $P(B)>0$, ist das aequivalent zu
+\[
+P(A\mid B)=P(A)
+\]
+
+Falls $P(A)>0$, ist das aequivalent zu
+\[
+P(B\mid A)=P(B)
+\]
+
+\textbf{Merke:}
+Am sichersten prueft man Unabhaengigkeit fast immer mit
+\[
+P(A \cap B)\stackrel{?}{=}P(A)P(B)
+\]
+weil das auch dann funktioniert, wenn eine Wahrscheinlichkeit $0$ ist.
+
+\subsection{Wichtige aequivalente Aussagen}
+Unter geeigneten Voraussetzungen sind aequivalent:
+\begin{align*}
+P(A \cap B)&=P(A)P(B) \\
+P(A\mid B)&=P(A) \\
+P(B\mid A)&=P(B) \\
+P(A\mid \overline{B})&=P(A) \\
+P(\overline{A}\mid B)&=P(\overline{A})
+\end{align*}
+
+\textbf{Merke:}
+Unabhaengigkeit bleibt auch bei Gegenereignissen erhalten:
+\begin{itemize}
+  \item aus $A \perp B$ folgt auch $A \perp \overline{B}$
+  \item aus $A \perp B$ folgt auch $\overline{A} \perp B$
+  \item aus $A \perp B$ folgt auch $\overline{A} \perp \overline{B}$
+\end{itemize}
+
+\subsection{Extrem wichtige Abgrenzung}
+\textbf{Unabhaengig} ist nicht dasselbe wie \textbf{disjunkt}.
+
+\textbf{Disjunkt:}
+\[
+A \cap B = \emptyset
+\]
+
+\textbf{Unabhaengig:}
+\[
+P(A \cap B)=P(A)P(B)
+\]
+
+Falls $A$ und $B$ disjunkt sind und beide positive Wahrscheinlichkeit haben, dann gilt
+\[
+P(A \cap B)=0 \neq P(A)P(B)
+\]
+also sind sie \textbf{nicht} unabhaengig.
+
+\textbf{Merke:}
+Disjunkt mit positiver Wahrscheinlichkeit bedeutet fast immer abhaengig.
+
+\subsection{Spezialfaelle}
+\begin{itemize}
+  \item Wenn $P(A)=0$ oder $P(B)=0$, dann sind $A$ und $B$ unabhaengig.
+  \item Wenn $P(A)=1$ oder $P(B)=1$, dann sind $A$ und $B$ ebenfalls unabhaengig.
+\end{itemize}
+
+\textbf{Warum?}
+Dann passt die Gleichung
+\[
+P(A \cap B)=P(A)P(B)
+\]
+automatisch.
+
+\subsection{Ereignis unabhaengig von sich selbst}
+Ein Ereignis $A$ ist genau dann unabhaengig von sich selbst, wenn
+\[
+P(A \cap A)=P(A)^2
+\]
+also
+\[
+P(A)=P(A)^2
+\]
+
+Daraus folgt:
+\[
+P(A)\in\{0,1\}
+\]
+
+\textbf{Merke:}
+Ein Ereignis ist nur dann von sich selbst unabhaengig, wenn es fast unmoeglich oder sicher ist.
+
+\subsection{Typische Pruefung von Unabhaengigkeit in Tabellen}
+Bei einer Tabelle mit gemeinsamen Wahrscheinlichkeiten:
+\begin{itemize}
+  \item zuerst Randwahrscheinlichkeiten berechnen
+  \item dann vergleichen:
+  \[
+  P(A \cap B)\stackrel{?}{=}P(A)P(B)
+  \]
+\end{itemize}
+
+Beispielstruktur:
+\[
+\begin{array}{c|cc}
+ & B & \overline{B} \\
+\hline
+A & P(A \cap B) & P(A \cap \overline{B}) \\
+\overline{A} & P(\overline{A} \cap B) & P(\overline{A} \cap \overline{B})
+\end{array}
+\]
+
+\subsection{Unabhaengigkeit von Zufallsvariablen}
+Zwei Zufallsvariablen $X,Y$ heissen unabhaengig, wenn fuer alle Teilmengen $A,B \subseteq \mathbb{R}$ gilt:
+\[
+P(X \in A;\, Y \in B)=P(X \in A)\cdot P(Y \in B)
+\]
+
+Bei diskreten Zufallsvariablen reicht es, fuer alle Werte $a,b$ zu pruefen:
+\[
+P(X=a, Y=b)=P(X=a)\cdot P(Y=b)
+\]
+
+\textbf{Merke:}
+Bei diskreten Variablen prueft man meistens punktweise mit den einzelnen Werten.
+
+\subsection{Gemeinsame Verteilung}
+Die gemeinsame Verteilung von $X$ und $Y$ ist die Verteilung des zufaelligen Elements
+\[
+Z=(X,Y)
+\]
+
+Also:
+\[
+P_{X,Y}(a,b)=P(X=a,Y=b)
+\]
+
+Das ist eine Tabelle aller gemeinsamen Wahrscheinlichkeiten.
+
+\subsection{Randverteilungen}
+Aus der gemeinsamen Verteilung bekommt man die Randverteilungen durch Aufsummieren ueber Zeilen bzw. Spalten:
+\begin{align*}
+P(X=a) &= \sum_b P(X=a,Y=b) \\
+P(Y=b) &= \sum_a P(X=a,Y=b)
+\end{align*}
+
+\textbf{Merke:}
+``Randverteilung'' heisst so, weil die Summen in einer Tabelle am Rand landen.
+
+\subsection{Kriterium ueber gemeinsame und Randverteilungen}
+Zwei Zufallsvariablen $X,Y$ sind genau dann unabhaengig, wenn fuer alle $a,b$ gilt:
+\[
+P(X=a,Y=b)=P(X=a)\cdot P(Y=b)
+\]
+
+Also:
+\[
+\text{gemeinsame Verteilung} = \text{Produkt der Randverteilungen}
+\]
+
+\textbf{Praktisches Rezept}
+\begin{enumerate}
+  \item Gemeinsame Verteilung aufstellen.
+  \item Randverteilungen ausrechnen.
+  \item Fuer passende Werte $a,b$ pruefen, ob das Produkt passt.
+\end{enumerate}
+
+\subsection{Typische Beispiele}
+\textbf{1. Zwei faire unterscheidbare Wuerfel}
+
+Wenn
+\begin{itemize}
+  \item $X$ = Augenzahl des weissen Wuerfels
+  \item $Y$ = Augenzahl des schwarzen Wuerfels
+\end{itemize}
+dann sind $X$ und $Y$ unabhaengig.
+
+Denn:
+\[
+P(X=a)=\frac16,\qquad P(Y=b)=\frac16,\qquad P(X=a,Y=b)=\frac1{36}
+\]
+also
+\[
+P(X=a,Y=b)=P(X=a)P(Y=b)
+\]
+
+\textbf{2. Summe und einzelner Wuerfel}
+
+Wenn
+\begin{itemize}
+  \item $X$ = Summe beider Augenzahlen
+  \item $Y$ = Augenzahl des schwarzen Wuerfels
+\end{itemize}
+dann sind $X$ und $Y$ \textbf{abhaengig}.
+
+Beispiel:
+\[
+P(X=2,Y=3)=0
+\]
+aber
+\[
+P(X=2)\cdot P(Y=3)=\frac1{36}\cdot\frac16 \neq 0
+\]
+
+\textbf{Merke:}
+Sobald eine Variable Information ueber die andere verraet, sind sie meistens abhaengig.
+
+\subsection{Unabhaengigkeit von $n$ Zufallsvariablen}
+$X_1,\dots,X_n$ heissen vollstaendig unabhaengig, wenn fuer alle Teilmengen $A_1,\dots,A_n$ gilt:
+\[
+P(X_1\in A_1;\dots;X_n\in A_n)=P(X_1\in A_1)\cdots P(X_n\in A_n)
+\]
+
+\textbf{Wichtig:}
+Paarweise unabhaengig ist nicht immer dasselbe wie vollstaendig unabhaengig.
+
+\textbf{Merke:}
+Wenn in der Aufgabe explizit mehrere Variablen vorkommen, genau lesen, ob wirklich ``vollstaendig unabhaengig'' gemeint ist.
+
+\subsection{Typische Aufgabentypen}
+\textbf{1. Sind zwei Ereignisse unabhaengig?}
+
+Rezept:
+\begin{enumerate}
+  \item $P(A)$ berechnen
+  \item $P(B)$ berechnen
+  \item $P(A \cap B)$ berechnen
+  \item vergleichen mit $P(A)P(B)$
+\end{enumerate}
+
+\textbf{2. Sind zwei Zufallsvariablen unabhaengig?}
+
+Rezept:
+\begin{enumerate}
+  \item gemeinsame Verteilung bestimmen
+  \item Randverteilungen bestimmen
+  \item pruefen, ob fuer alle Werte das Produktkriterium gilt
+\end{enumerate}
+
+\textbf{3. Bedingte Wahrscheinlichkeit und Unabhaengigkeit}
+
+Wenn $P(A\mid B)\neq P(A)$, dann sind $A$ und $B$ abhaengig.
+
+\textbf{4. Statistische Tabellen}
+
+Wenn z.B. Geschlecht und Testerfolg gegeben sind:
+\begin{itemize}
+  \item $M$ = Maedchen
+  \item $B$ = bestanden
+\end{itemize}
+
+Dann pruefen:
+\[
+P(M \cap B)\stackrel{?}{=}P(M)P(B)
+\]
+
+oder alternativ
+\[
+P(B\mid M)\stackrel{?}{=}P(B)
+\]
+
+\subsection{Typische Fallen}
+\begin{itemize}
+  \item Disjunktheit mit Unabhaengigkeit verwechselt.
+  \item Nur ein Beispielwert geprueft, obwohl alle noetig waeren.
+  \item Bei Zufallsvariablen gemeinsame und Randverteilung verwechselt.
+  \item Aus ``gleiche Randverteilungen'' faelschlich auf Unabhaengigkeit geschlossen.
+  \item $P(A\mid B)=P(A)$ benutzt, obwohl $P(B)=0$ ist und der Ausdruck gar nicht definiert waere.
+  \item Paarweise Unabhaengigkeit mit vollstaendiger Unabhaengigkeit verwechselt.
+\end{itemize}
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item Ereignisse unabhaengig $\Leftrightarrow P(A \cap B)=P(A)P(B)$.
+  \item Falls definiert: auch aequivalent zu $P(A\mid B)=P(A)$.
+  \item Disjunkt ist nicht unabhaengig.
+  \item Ereignis nur dann von sich selbst unabhaengig, wenn $P(A)=0$ oder $1$.
+  \item Zufallsvariablen unabhaengig $\Leftrightarrow$ gemeinsame Verteilung = Produkt der Randverteilungen.
+  \item Randverteilungen bekommt man durch Aufsummieren der gemeinsamen Verteilung.
+\end{itemize}
+
+\section{Kapitel 1.6: Haeufig vorkommende Experimente und Verteilungen}
+
+\subsection{Die wichtigste Auswahlfrage}
+Bevor du irgendeine Formel nimmst, frage:
+\begin{enumerate}
+  \item Gibt es eine \textbf{feste Anzahl} von Versuchen?
+  \item Oder wartet man \textbf{bis zum ersten Erfolg}?
+  \item Wird \textbf{mit Zuruecklegen / unabhaengig} gezogen?
+  \item Oder \textbf{ohne Zuruecklegen / abhaengig}?
+\end{enumerate}
+
+Dann gilt fast immer:
+\begin{itemize}
+  \item feste Anzahl, unabhaengige Bernoulli-Versuche $\Rightarrow$ \textbf{Binomialverteilung}
+  \item warten bis erster Erfolg $\Rightarrow$ \textbf{geometrische Verteilung}
+  \item feste Anzahl, ohne Zuruecklegen $\Rightarrow$ \textbf{hypergeometrische Verteilung}
+\end{itemize}
+
+\subsection{$n$ unabhaengige Durchfuehrungen eines Experiments}
+Hat das Einzelexperiment den Wahrscheinlichkeitsraum $(\Omega,P)$, dann beschreibt
+\[
+(\Omega^n,P')
+\]
+die $n$ unabhaengigen Wiederholungen.
+
+Fuer Rechteckereignisse gilt:
+\[
+P'(A_1 \times \dots \times A_n)=P(A_1)\cdots P(A_n)
+\]
+
+\textbf{Merke:}
+Unabhaengige Wiederholung bedeutet: Wahrscheinlichkeiten entlang der Durchfuehrungen multiplizieren.
+
+\subsection{Bernoulli-Kette}
+Ein Bernoulli-Experiment hat
+\[
+\Omega=\{0,1\}, \qquad P(1)=p,\qquad P(0)=q=1-p
+\]
+
+Eine \textbf{Bernoulli-Kette der Laenge $n$} ist die $n$-fache unabhaengige Wiederholung dieses Experiments.
+
+Hat ein Tupel $(\omega_1,\dots,\omega_n)$ genau $k$ Erfolge ($1$en), dann gilt:
+\[
+P((\omega_1,\dots,\omega_n))=p^k q^{n-k}
+\]
+
+\textbf{Merke:}
+Alle Folgen mit gleich vielen Erfolgen haben dieselbe Wahrscheinlichkeit.
+
+\subsection{Binomialverteilung}
+Wenn $X$ die Anzahl der Erfolge in $n$ unabhaengigen Bernoulli-Versuchen mit Erfolgswahrscheinlichkeit $p$ zaehlt, dann gilt:
+\[
+X \sim \operatorname{Bin}(n,p)
+\]
+
+mit
+\[
+P(X=k)=\binom{n}{k}p^k q^{n-k}
+\qquad \text{fuer } k=0,1,\dots,n
+\]
+
+\textbf{Bedeutung der Faktoren}
+\begin{itemize}
+  \item $\binom{n}{k}$ = an wie vielen Stellen die $k$ Erfolge liegen koennen
+  \item $p^k$ = Wahrscheinlichkeit der $k$ Erfolge
+  \item $q^{n-k}$ = Wahrscheinlichkeit der restlichen $n-k$ Misserfolge
+\end{itemize}
+
+\subsection{Wann nehme ich die Binomialverteilung?}
+\begin{itemize}
+  \item feste Anzahl $n$ von Versuchen
+  \item jeder Versuch hat genau zwei Ausgaenge: Erfolg / Misserfolg
+  \item Erfolgswahrscheinlichkeit $p$ bleibt gleich
+  \item Versuche sind unabhaengig
+\end{itemize}
+
+\textbf{Typische Formulierungen}
+\begin{itemize}
+  \item ``genau $k$ Treffer''
+  \item ``hoechstens $k$ Ausschussteile''
+  \item ``mindestens $k$ richtige Antworten''
+  \item ``in $n$ Versuchen wie oft Erfolg''
+\end{itemize}
+
+\subsection{Wichtige Binomial-Summen}
+\begin{align*}
+P(X\le k) &= \sum_{i=0}^k \binom{n}{i}p^i q^{n-i} \\
+P(X\ge k) &= \sum_{i=k}^n \binom{n}{i}p^i q^{n-i} \\
+P(a\le X\le b) &= \sum_{i=a}^b \binom{n}{i}p^i q^{n-i}
+\end{align*}
+
+\textbf{Merke:}
+Bei ``mindestens'' und ``hoechstens'' oft das Gegenereignis benutzen, wenn die Summe kuerzer wird.
+
+\subsection{Typische Binomial-Beispiele}
+\textbf{1. Multiple Choice mit Raten}
+
+Pro Frage:
+\[
+p=\frac13,\qquad q=\frac23
+\]
+
+Bei $10$ Fragen:
+\[
+X \sim \operatorname{Bin}(10,\tfrac13)
+\]
+
+Bestanden ab mindestens $8$ richtig:
+\[
+P(X\ge 8)=\sum_{k=8}^{10}\binom{10}{k}\left(\frac13\right)^k\left(\frac23\right)^{10-k}
+\]
+
+\textbf{2. Ausschuss in Lieferung}
+
+Wenn jedes Geraet mit Wahrscheinlichkeit $p=0.02$ Ausschuss ist und $100$ Geraete unabhaengig produziert werden:
+\[
+X \sim \operatorname{Bin}(100,0.02)
+\]
+
+``Lieferung wird abgelehnt'' bei mehr als $4$ Ausschuss:
+\[
+P(X>4)=1-P(X\le 4)
+\]
+
+\textbf{3. Bitfehler}
+
+Bei einem Byte:
+\[
+n=8
+\]
+
+Wenn ein Bit mit Wahrscheinlichkeit $p=0.2$ falsch ist:
+\[
+X \sim \operatorname{Bin}(8,0.2)
+\]
+
+\begin{align*}
+P(\text{Byte korrekt}) &= P(X=0)=0.8^8 \\
+P(X=2) &= \binom82 0.2^2 0.8^6 \\
+P(X\le 2) &= \sum_{k=0}^2 \binom8k 0.2^k 0.8^{8-k}
+\end{align*}
+
+\subsection{Galton-Brett}
+Beim Galton-Brett ist jede Ablenkung links/rechts ein Bernoulli-Experiment mit
+\[
+p=\frac12
+\]
+
+Nach $n$ Ebenen ist die Behaelternummer gleich der Anzahl der Rechtsablenkungen.
+
+Also:
+\[
+X_n \sim \operatorname{Bin}\left(n,\frac12\right)
+\]
+
+\textbf{Merke:}
+Galton-Brett = Binomialverteilung in Verkleidung.
+
+\subsection{Geometrische Verteilung}
+Hier wird nicht die Anzahl der Erfolge in fester Zeit gezaehlt, sondern:
+
+\textbf{``Wie lange dauert es bis zum ersten Erfolg?''}
+
+Wenn in jedem Versuch die Erfolgswahrscheinlichkeit $p$ ist und die Versuche unabhaengig sind, dann:
+\[
+X \sim \operatorname{Geom}(p)
+\]
+
+mit
+\[
+P(X=n)=p\,q^{n-1}
+\qquad \text{fuer } n=1,2,3,\dots
+\]
+
+\textbf{Bedeutung:}
+\begin{itemize}
+  \item erst $n-1$ mal kein Erfolg
+  \item dann einmal Erfolg
+\end{itemize}
+
+\subsection{Wann nehme ich die geometrische Verteilung?}
+\begin{itemize}
+  \item unbegrenzt viele Versuche moeglich
+  \item jeder Versuch ist Bernoulli mit gleichem $p$
+  \item gesucht ist die Wartezeit bis zum ersten Erfolg
+\end{itemize}
+
+\textbf{Typische Formulierungen}
+\begin{itemize}
+  \item ``beim wievielten Versuch erstmals Erfolg''
+  \item ``wie lange dauert es bis zur ersten 6''
+  \item ``mindestens so viele Versuche noetig''
+\end{itemize}
+
+\subsection{Wichtige geometrische Wahrscheinlichkeiten}
+\[
+P(X=n)=p\,q^{n-1}
+\]
+
+\[
+P(X>n)=q^n
+\]
+
+\[
+P(X\ge n)=q^{n-1}
+\]
+
+\[
+P(X\le n)=1-q^n
+\]
+
+\textbf{Merke:}
+``Noch kein Erfolg nach $n$ Versuchen'' bedeutet einfach:
+\[
+q^n
+\]
+
+\subsection{Typische geometrische Beispiele}
+\textbf{1. Wuerfeln bis zur ersten 6}
+
+\[
+p=\frac16,\qquad q=\frac56
+\]
+
+\[
+P(X=n)=\frac16\left(\frac56\right)^{n-1}
+\]
+
+\[
+P(X>n)=\left(\frac56\right)^n
+\]
+
+\textbf{2. Mensch-aergere-dich-nicht}
+
+Schon $20$ mal keine $6$ gewuerfelt?
+Dann ist die Wahrscheinlichkeit fuer eine $6$ beim naechsten Wurf trotzdem wieder
+\[
+\frac16
+\]
+
+\textbf{Merke:}
+Die geometrische Verteilung fuehrt genau zur Idee ``Vergangenheit egal'' bei unabhaengigen Versuchen. Vorheriges Pech macht den naechsten Erfolg nicht wahrscheinlicher.
+
+\subsection{Binomial vs. geometrisch}
+\begin{itemize}
+  \item \textbf{Binomial:} Wie oft tritt Erfolg in $n$ Versuchen auf?
+  \item \textbf{Geometrisch:} Wie viele Versuche braucht man bis zum ersten Erfolg?
+\end{itemize}
+
+\textbf{Kurzmerksatz}
+\begin{itemize}
+  \item \textbf{Anzahl von Erfolgen} $\Rightarrow$ binomial
+  \item \textbf{Wartezeit bis erster Erfolg} $\Rightarrow$ geometrisch
+\end{itemize}
+
+\subsection{Hypergeometrische Verteilung}
+Situation:
+\begin{itemize}
+  \item insgesamt $N$ Objekte
+  \item davon $M$ ``Trefferobjekte'' / schwarze Kugeln
+  \item es werden $n$ Objekte \textbf{ohne Zuruecklegen} gezogen
+  \item $X$ = Anzahl Treffer unter den $n$ gezogenen
+\end{itemize}
+
+Dann gilt:
+\[
+X \sim \operatorname{Hyp}(N,M,n)
+\]
+
+mit
+\[
+P(X=k)=\frac{\binom{M}{k}\binom{N-M}{n-k}}{\binom{N}{n}}
+\]
+
+falls die Zahlen sinnvoll sind, sonst $0$.
+
+\textbf{Bedeutung der Faktoren}
+\begin{itemize}
+  \item $\binom{M}{k}$ = waehle $k$ Trefferobjekte
+  \item $\binom{N-M}{n-k}$ = waehle $n-k$ Nicht-Treffer
+  \item $\binom{N}{n}$ = alle moeglichen Auswahlen
+\end{itemize}
+
+\subsection{Wann nehme ich die hypergeometrische Verteilung?}
+\begin{itemize}
+  \item feste Grundgesamtheit mit $N$ Objekten
+  \item davon $M$ ``besondere''
+  \item Ziehen \textbf{ohne Zuruecklegen}
+  \item gesucht: Anzahl der besonderen Objekte in der Stichprobe
+\end{itemize}
+
+\textbf{Typische Formulierungen}
+\begin{itemize}
+  \item ``aus $100$ Dosen sind $10$ verunreinigt, $5$ werden entnommen''
+  \item ``unter $20$ Losen sind $2$ Gewinne, $3$ Ziehungen ohne Zuruecklegen''
+  \item ``Urnenziehen ohne Zuruecklegen''
+\end{itemize}
+
+\subsection{Typische hypergeometrische Beispiele}
+\textbf{1. Erbsendosen / verunreinigte Dosen}
+
+\[
+N=100,\qquad M=10,\qquad n=5
+\]
+
+\[
+P(X=k)=\frac{\binom{10}{k}\binom{90}{5-k}}{\binom{100}{5}}
+\]
+
+\[
+P(X=0)=\frac{\binom{10}{0}\binom{90}{5}}{\binom{100}{5}}
+\]
+
+\[
+P(X\le 1)=P(X=0)+P(X=1)
+\]
+
+\textbf{2. Lose ziehen ohne Zuruecklegen}
+
+\[
+N=20,\qquad M=2,\qquad n=3
+\]
+
+\[
+P(\text{kein Gewinn})=P(X=0)=\frac{\binom20\binom{18}{3}}{\binom{20}{3}}
+\]
+
+\[
+P(\text{genau ein Gewinn})=P(X=1)=\frac{\binom21\binom{18}{2}}{\binom{20}{3}}
+\]
+
+\subsection{Hypergeometrisch vs. binomial}
+\textbf{Hypergeometrisch:}
+\begin{itemize}
+  \item ohne Zuruecklegen
+  \item Trefferwahrscheinlichkeit aendert sich von Zug zu Zug
+  \item Ziehungen sind nicht unabhaengig
+\end{itemize}
+
+\textbf{Binomial:}
+\begin{itemize}
+  \item mit Zuruecklegen oder modelliert als unabhaengig
+  \item Trefferwahrscheinlichkeit bleibt konstant
+  \item Ziehungen sind unabhaengig
+\end{itemize}
+
+\textbf{Wichtiger Grenzfall}
+Wenn $n$ klein gegenueber $N$ ist, dann ist die hypergeometrische Verteilung oft sehr nah an der Binomialverteilung mit
+\[
+p \approx \frac{M}{N}
+\]
+
+\textbf{Merke:}
+``Ohne Zuruecklegen'' schreit eigentlich nach hypergeometrisch. Binomial ist dann nur eine Annaeherung, wenn die Gesamtmenge sehr gross ist.
+
+\subsection{Kurzvergleich der drei wichtigsten Verteilungen}
+\[
+\begin{array}{c|c|c}
+\text{Verteilung} & \text{Frage} & \text{Formel} \\
+\hline
+\text{Binomial} & \text{Wie viele Erfolge in } n \text{ Versuchen?} &
+\binom{n}{k}p^k q^{n-k} \\
+\text{Geometrisch} & \text{Wann kommt der erste Erfolg?} &
+p q^{n-1} \\
+\text{Hypergeometrisch} & \text{Wie viele Treffer ohne Zuruecklegen?} &
+\dfrac{\binom{M}{k}\binom{N-M}{n-k}}{\binom{N}{n}}
+\end{array}
+\]
+
+\subsection{Typische Klausur-Fallen}
+\begin{itemize}
+  \item Binomial und hypergeometrisch verwechselt.
+  \item Bei ``ohne Zuruecklegen'' trotzdem konstantes $p$ benutzt.
+  \item Bei geometrischer Verteilung mit $n=0$ statt $n=1$ angefangen.
+  \item ``mindestens einmal Erfolg'' nicht ueber das Gegenereignis gerechnet.
+  \item Bei Binomial den Faktor $\binom{n}{k}$ vergessen.
+  \item Bei geometrisch ``genau beim $n$-ten Versuch'' mit ``nach $n$ Versuchen'' verwechselt.
+\end{itemize}
+
+\subsection{Notation fuer saubere Loesungen}
+Gute Standardsaetze:
+\begin{itemize}
+  \item ``Es handelt sich um $n$ unabhaengige Bernoulli-Versuche mit Erfolgswahrscheinlichkeit $p$. ''
+  \item ``Damit ist $X$ binomialverteilt mit Parametern $n$ und $p$. ''
+  \item ``Da ohne Zuruecklegen gezogen wird, ist $X$ hypergeometrisch verteilt. ''
+  \item ``Gesucht ist die Wartezeit bis zum ersten Erfolg; daher verwenden wir die geometrische Verteilung. ''
+  \item ``Wir berechnen die Wahrscheinlichkeit ueber das Gegenereignis. ''
+\end{itemize}
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item feste Anzahl + unabhaengig + konstantes $p$ $\Rightarrow$ binomial
+  \item erster Erfolg / Wartezeit $\Rightarrow$ geometrisch
+  \item ohne Zuruecklegen $\Rightarrow$ hypergeometrisch
+  \item Binomial: $\displaystyle P(X=k)=\binom{n}{k}p^k q^{n-k}$
+  \item Geometrisch: $\displaystyle P(X=n)=p q^{n-1}$
+  \item Hypergeometrisch: $\displaystyle P(X=k)=\frac{\binom{M}{k}\binom{N-M}{n-k}}{\binom{N}{n}}$
+  \item ``mindestens einmal'' oft am schnellsten ueber $1-P(X=0)$ oder $1-q^n$
+\end{itemize}
+
+\section{Kapitel 1.7: Erwartungswert}
+
+\subsection{Grundidee}
+Der Erwartungswert ist der \textbf{gewichtete Mittelwert} einer Zufallsvariable.
+
+Jeder moegliche Wert wird mit seiner Wahrscheinlichkeit gewichtet.
+
+\textbf{Interpretation:}
+\begin{itemize}
+  \item langfristiger Durchschnitt bei sehr vielen Wiederholungen
+  \item theoretischer Mittelwert
+  \item nicht zwingend ein tatsaechlich moeglicher Einzelwert
+\end{itemize}
+
+\textbf{Wichtig:}
+Ein Erwartungswert von $3.5$ beim Wuerfel heisst nicht, dass je eine $3.5$ fallen kann.
+
+\subsection{Definition bei endlichem Wertebereich}
+Hat $X$ die moeglichen Werte $x_1,\dots,x_n$, dann:
+\[
+E(X)=\sum_{i=1}^n x_i \cdot P(X=x_i)
+\]
+
+\subsection{Definition bei abz\"ahlbar unendlichem Wertebereich}
+Hat $X$ die moeglichen Werte $x_1,x_2,\dots$, dann:
+\[
+E(X)=\sum_{i=1}^\infty x_i \cdot P(X=x_i)
+\]
+
+\textbf{Aber nur wenn die Reihe konvergiert.}
+
+\textbf{Merke:}
+Nicht jede Zufallsvariable hat automatisch einen Erwartungswert.
+
+\subsection{Alternative Rechenform ueber $\Omega$}
+Falls $p(\omega)=P(\{\omega\})$, dann gilt:
+\[
+E(X)=\sum_{\omega \in \Omega} X(\omega)\,p(\omega)
+\]
+
+\textbf{Wann nuetzlich?}
+\begin{itemize}
+  \item wenn $\Omega$ klein und konkret gegeben ist
+  \item wenn $X(\omega)$ direkt ausgerechnet werden kann
+  \item wenn mehrere $\omega$ denselben Funktionswert haben und man bequem gruppieren kann
+\end{itemize}
+
+\subsection{Standardrezept}
+\begin{enumerate}
+  \item Alle moeglichen Werte von $X$ bestimmen.
+  \item Zu jedem Wert die Wahrscheinlichkeit bestimmen.
+  \item Wert mal Wahrscheinlichkeit rechnen.
+  \item Alles aufsummieren.
+\end{enumerate}
+
+\subsection{Wichtigste Rechenregeln}
+\textbf{1. Linearitaet}
+\begin{align*}
+E(aX) &= aE(X) \\
+E(X_1+X_2) &= E(X_1)+E(X_2)
+\end{align*}
+
+allgemeiner:
+\[
+E(a_1X_1+\dots+a_nX_n)=a_1E(X_1)+\dots+a_nE(X_n)
+\]
+
+\textbf{Extrem wichtig:}
+Fuer die Summe brauchst du \textbf{keine} Unabhaengigkeit.
+
+\subsection{2. Monotonie}
+Wenn fuer alle $\omega$ gilt:
+\[
+X_1(\omega)\le X_2(\omega)
+\]
+dann folgt:
+\[
+E(X_1)\le E(X_2)
+\]
+
+\subsection{3. Erwartungswert von $g(X)$}
+Wenn $Y=g(X)$, dann:
+\[
+E(Y)=E(g(X))=\sum_{x \in X(\Omega)} g(x)\,P(X=x)
+\]
+
+\textbf{Merke:}
+Sehr praktisch bei $X^2$, $|X|$, Auszahlungen, Kostenfunktionen usw.
+
+\subsection{4. Produktregel bei Unabhaengigkeit}
+Wenn $X_1,X_2$ unabhaengig sind, dann:
+\[
+E(X_1X_2)=E(X_1)\cdot E(X_2)
+\]
+
+allgemeiner fuer unabhaengige $X_1,\dots,X_n$:
+\[
+E(X_1\cdots X_n)=E(X_1)\cdots E(X_n)
+\]
+
+\textbf{Wichtig:}
+Ohne Unabhaengigkeit ist das im Allgemeinen \textbf{falsch}.
+
+\subsection{Typische Klausurstrategie}
+\textbf{Wenn eine Zufallsvariable eine Summe ist:}
+\[
+X=X_1+\dots+X_n
+\]
+dann fast immer sofort
+\[
+E(X)=E(X_1)+\dots+E(X_n)
+\]
+benutzen, statt alles brutal auszumultiplizieren.
+
+\textbf{Wenn eine Zufallsvariable ein Produkt ist:}
+\[
+Y=X_1X_2
+\]
+dann nur bei Unabhaengigkeit sofort
+\[
+E(Y)=E(X_1)E(X_2)
+\]
+
+\subsection{Typische Beispiele}
+\textbf{1. Fairer Wuerfel}
+\[
+E(X)=1\cdot \frac16+2\cdot \frac16+\dots+6\cdot \frac16=\frac{1+2+3+4+5+6}{6}=3.5
+\]
+
+\textbf{Merke:}
+Bei Laplace-Verteilung ist der Erwartungswert einfach das arithmetische Mittel aller moeglichen Werte.
+
+\subsection{2. Augensumme zweier fairer Wuerfel}
+Seien
+\[
+X_1=\text{Augenzahl des ersten Wuerfels},\qquad X_2=\text{Augenzahl des zweiten Wuerfels}
+\]
+
+Dann:
+\[
+X=X_1+X_2
+\]
+
+und damit:
+\[
+E(X)=E(X_1)+E(X_2)=3.5+3.5=7
+\]
+
+\subsection{3. Augenprodukt zweier fairer Wuerfel}
+\[
+Y=X_1X_2
+\]
+
+Da $X_1$ und $X_2$ unabhaengig sind:
+\[
+E(Y)=E(X_1X_2)=E(X_1)E(X_2)=3.5^2=12.25
+\]
+
+\subsection{4. Bernoulli-Verteilung}
+Wenn
+\[
+P(X=1)=p,\qquad P(X=0)=q=1-p
+\]
+dann:
+\[
+E(X)=0\cdot q+1\cdot p=p
+\]
+
+\textbf{Merke:}
+Bernoulli-Mittelwert = Erfolgswahrscheinlichkeit.
+
+\subsection{5. Binomialverteilung}
+Wenn
+\[
+X \sim \operatorname{Bin}(n,p)
+\]
+dann:
+\[
+E(X)=np
+\]
+
+\textbf{Warum schnell?}
+Man schreibt
+\[
+X=X_1+\dots+X_n
+\]
+mit Bernoulli-Variablen $X_i$, also:
+\[
+E(X)=E(X_1)+\dots+E(X_n)=p+\dots+p=np
+\]
+
+\subsection{6. Geometrische Verteilung}
+Wenn
+\[
+X \sim \operatorname{Geom}(p)
+\]
+dann:
+\[
+E(X)=\frac{1}{p}
+\]
+
+\textbf{Beispiel}
+Beim Warten auf die erste $6$:
+\[
+p=\frac16
+\qquad \Rightarrow \qquad
+E(X)=6
+\]
+
+\textbf{Merke:}
+Geometrisch = mittlere Wartezeit bis zum ersten Erfolg.
+
+\subsection{7. Hypergeometrische Verteilung}
+Wenn
+\[
+X \sim \operatorname{Hyp}(N,M,n)
+\]
+dann:
+\[
+E(X)=n\cdot \frac{M}{N}
+\]
+
+\textbf{Interpretation:}
+\[
+\frac{M}{N}
+\]
+ist der Trefferanteil in der Grundgesamtheit, und davon zieht man im Mittel $n$-mal.
+
+\subsection{8. Konstante Zufallsvariable}
+Wenn
+\[
+X(\omega)=c \quad \text{fuer alle } \omega
+\]
+dann:
+\[
+E(X)=c
+\]
+
+\subsection{Gewinn-/Kostenaufgaben}
+Wenn $X$ ein Gewinn in Cent oder Euro ist, dann ist
+\[
+E(X)
+\]
+der mittlere Gewinn pro Spiel.
+
+\textbf{Interpretation}
+\begin{itemize}
+  \item $E(X)>0$: langfristig guenstig
+  \item $E(X)<0$: langfristig schlecht
+  \item $E(X)=0$: faires Spiel im Mittel
+\end{itemize}
+
+\textbf{Typische Klausuridee}
+\begin{itemize}
+  \item erst Auszahlungsvariable sauber definieren
+  \item dann Erwartungswert ausrechnen
+  \item bei Einsatz am Ende den Einsatz abziehen
+\end{itemize}
+
+\subsection{Wann nutze ich $g(X)$?}
+Wenn nicht $X$ selbst, sondern z.B. das Quadrat, der Gewinn, die Kosten oder der Betrag gefragt ist:
+\[
+Y=g(X)
+\]
+
+dann:
+\[
+E(Y)=\sum_x g(x)\,P(X=x)
+\]
+
+\textbf{Beispiel}
+Wenn $Y=X^2$, dann:
+\[
+E(Y)=E(X^2)=\sum_x x^2 P(X=x)
+\]
+
+\subsection{Typische Aufgabentypen}
+\textbf{1. ``Wie viele im Mittel?''}
+
+Das ist fast immer direkt eine Frage nach $E(X)$.
+
+\textbf{2. Summe mehrerer Beitraege}
+
+Dann fast immer Linearitaet benutzen.
+
+\textbf{3. Produkt mehrerer Zufallsvariablen}
+
+Nur bei Unabhaengigkeit auf Produkt der Erwartungswerte gehen.
+
+\textbf{4. Warten bis erster Erfolg}
+
+Dann geometrisch und
+\[
+E(X)=\frac1p
+\]
+
+\textbf{5. Anzahl Treffer in Stichprobe}
+
+Je nach Situation:
+\begin{itemize}
+  \item mit Zuruecklegen / unabhaengig: binomial, $E(X)=np$
+  \item ohne Zuruecklegen: hypergeometrisch, $E(X)=n\frac{M}{N}$
+\end{itemize}
+
+\subsection{Typische Fallen}
+\begin{itemize}
+  \item Erwartungswert mit wahrscheinlichstem Wert verwechselt.
+  \item Erwartungswert als zwingend moeglichen Einzelwert interpretiert.
+  \item Bei Summen unnoetig kompliziert gerechnet statt Linearitaet zu nutzen.
+  \item Produktregel ohne Unabhaengigkeit benutzt.
+  \item Bei $g(X)$ faelschlich $g(E(X))$ statt $E(g(X))$ gerechnet.
+  \item Einsatz/Gewinn nicht sauber unterschieden.
+  \item Bei unendlichem Wertebereich Konvergenz uebersehen.
+\end{itemize}
+
+\subsection{Notation fuer saubere Loesungen}
+Gute Standardsaetze:
+\begin{itemize}
+  \item ``Der Erwartungswert berechnet sich als gewichtete Summe der moeglichen Werte.''
+  \item ``Wir nutzen die Linearitaet des Erwartungswerts.''
+  \item ``Da die Zufallsvariablen unabhaengig sind, gilt $E(X_1X_2)=E(X_1)E(X_2)$. ''
+  \item ``Es handelt sich um eine geometrisch verteilte Zufallsvariable mit Parameter $p$, daher ist $E(X)=1/p$. ''
+  \item ``Da $X$ binomialverteilt ist, gilt $E(X)=np$. ''
+\end{itemize}
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item $\displaystyle E(X)=\sum_x x\,P(X=x)$
+  \item alternativ: $\displaystyle E(X)=\sum_{\omega \in \Omega} X(\omega)\,p(\omega)$
+  \item Linearitaet: $\displaystyle E(aX+bY)=aE(X)+bE(Y)$
+  \item bei Unabhaengigkeit: $\displaystyle E(XY)=E(X)E(Y)$
+  \item Bernoulli: $\displaystyle E(X)=p$
+  \item Binomial: $\displaystyle E(X)=np$
+  \item Geometrisch: $\displaystyle E(X)=1/p$
+  \item Hypergeometrisch: $\displaystyle E(X)=n\frac{M}{N}$
+\end{itemize}
+
+\section{Kapitel 1.8: Varianz und Standardabweichung}
+
+\subsection{Grundidee}
+Der Erwartungswert sagt, \emph{wo} eine Zufallsvariable im Mittel liegt.
+Die Varianz sagt, \emph{wie stark} sie um diesen Mittelwert streut.
+
+\textbf{Merke:}
+Gleicher Mittelwert heisst nicht gleiche Verteilung. Die Streuung kann komplett anders sein.
+
+\subsection{Definition}
+Sei
+\[
+\mu = E(X)
+\]
+
+Dann ist die Varianz:
+\[
+\operatorname{Var}(X)=D^2(X)=E\big((X-\mu)^2\big)
+\]
+
+Bei diskretem Wertebereich:
+\[
+\operatorname{Var}(X)=\sum_x (x-\mu)^2\,P(X=x)
+\]
+
+Die Standardabweichung ist:
+\[
+\sigma_X=\sqrt{\operatorname{Var}(X)}
+\]
+
+\textbf{Interpretation}
+\begin{itemize}
+  \item Varianz = mittlere quadratische Abweichung vom Mittelwert
+  \item Standardabweichung = typische Streuung in derselben Einheit wie $X$
+\end{itemize}
+
+\subsection{Warum quadrieren?}
+Weil sich sonst positive und negative Abweichungen wegheben wuerden.
+
+\textbf{Merke:}
+Varianz hat quadrierte Einheit, Standardabweichung wieder die normale Einheit.
+
+\subsection{Alternative Rechenformel}
+Die wichtigste Umformung:
+\[
+\operatorname{Var}(X)=E(X^2)-\big(E(X)\big)^2
+\]
+
+\textbf{Klausurregel:}
+Fast immer zuerst mit dieser Formel rechnen, nicht direkt mit $(x-\mu)^2$ aufmachen, wenn $E(X)$ und $E(X^2)$ leicht zu bekommen sind.
+
+\subsection{Rechenregeln}
+\textbf{1. Skalierung und Verschiebung}
+\begin{align*}
+\operatorname{Var}(aX) &= a^2 \operatorname{Var}(X) \\
+\operatorname{Var}(aX+b) &= a^2 \operatorname{Var}(X)
+\end{align*}
+
+\textbf{Merke:}
+\begin{itemize}
+  \item Multiplikation mit $a$ skaliert die Varianz mit $a^2$
+  \item Addition einer Konstante $b$ aendert die Varianz gar nicht
+\end{itemize}
+
+\subsection{2. Summe zweier Zufallsvariablen}
+Allgemein:
+\[
+\operatorname{Var}(X_1+X_2)
+=\operatorname{Var}(X_1)+\operatorname{Var}(X_2)+2\big(E(X_1X_2)-E(X_1)E(X_2)\big)
+\]
+
+Das ist dasselbe wie:
+\[
+\operatorname{Var}(X_1+X_2)
+=\operatorname{Var}(X_1)+\operatorname{Var}(X_2)+2\,\operatorname{cov}(X_1,X_2)
+\]
+
+Falls $X_1,X_2$ unabhaengig sind:
+\[
+\operatorname{Var}(X_1+X_2)=\operatorname{Var}(X_1)+\operatorname{Var}(X_2)
+\]
+
+\textbf{Extrem wichtig:}
+Varianz ist \textbf{nicht} linear.
+
+Also \textbf{falsch}:
+\[
+\operatorname{Var}(X_1+X_2)=\operatorname{Var}(X_1)+\operatorname{Var}(X_2)
+\]
+ohne Zusatzannahmen.
+
+\subsection{3. Produkt bei Unabhaengigkeit}
+Wenn $X_1,X_2$ unabhaengig sind:
+\[
+\operatorname{Var}(X_1X_2)=E(X_1^2)E(X_2^2)-\big(E(X_1)E(X_2)\big)^2
+\]
+
+\subsection{Spezialwerte wichtiger Verteilungen}
+\textbf{Bernoulli-Verteilung}
+\[
+X \sim \operatorname{Bern}(p)
+\]
+
+\[
+E(X)=p,\qquad \operatorname{Var}(X)=pq
+\]
+mit
+\[
+q=1-p
+\]
+
+\textbf{Binomialverteilung}
+\[
+X \sim \operatorname{Bin}(n,p)
+\]
+
+\[
+E(X)=np,\qquad \operatorname{Var}(X)=npq
+\]
+
+\textbf{Geometrische Verteilung}
+\[
+X \sim \operatorname{Geom}(p)
+\]
+
+\[
+E(X)=\frac1p,\qquad \operatorname{Var}(X)=\frac{q}{p^2}
+\]
+
+\textbf{Hypergeometrische Verteilung}
+\[
+X \sim \operatorname{Hyp}(N,M,n)
+\]
+
+\[
+E(X)=n\frac{M}{N}
+\]
+
+\[
+\operatorname{Var}(X)=
+n\cdot \frac{M}{N}\left(1-\frac{M}{N}\right)\cdot \frac{N-n}{N-1}
+\]
+
+\textbf{Merke:}
+Die hypergeometrische Varianz sieht fast aus wie bei der Binomialverteilung, aber mit dem Zusatzfaktor
+\[
+\frac{N-n}{N-1}
+\]
+wegen Ziehen ohne Zuruecklegen.
+
+\subsection{Beispiele}
+\textbf{1. Fairer Wuerfel}
+\[
+E(X)=3.5,\qquad E(X^2)=\frac{1^2+2^2+\dots+6^2}{6}=\frac{91}{6}
+\]
+
+also
+\[
+\operatorname{Var}(X)=\frac{91}{6}-3.5^2=\frac{35}{12}
+\]
+
+\textbf{2. Summe zweier fairer Wuerfel}
+
+Mit Unabhaengigkeit:
+\[
+\operatorname{Var}(X_1+X_2)=\operatorname{Var}(X_1)+\operatorname{Var}(X_2)=2\cdot \frac{35}{12}=\frac{35}{6}
+\]
+
+\subsection{Varianz Null}
+\[
+\operatorname{Var}(X)=0
+\]
+genau dann, wenn $X$ fast sicher konstant ist.
+
+\textbf{Merke:}
+Keine Streuung $\Leftrightarrow$ immer derselbe Wert mit Wahrscheinlichkeit $1$.
+
+\subsection{Tschebyscheff-Ungleichung}
+Fuer jede Zufallsvariable mit Mittelwert $\mu$ und Varianz $\sigma^2$ gilt fuer jedes $c>0$:
+\[
+P(|X-\mu|\ge c)\le \frac{\sigma^2}{c^2}
+\]
+
+und damit auch:
+\[
+P(|X-\mu|<c)\ge 1-\frac{\sigma^2}{c^2}
+\]
+
+\textbf{Bedeutung:}
+Große Abweichungen vom Mittelwert koennen durch die Varianz nach oben abgeschaetzt werden.
+
+\textbf{Wann benutzen?}
+\begin{itemize}
+  \item wenn nur Mittelwert und Varianz bekannt sind
+  \item wenn eine grobe obere Schranke fuer Abweichungswahrscheinlichkeiten gesucht ist
+\end{itemize}
+
+\subsection{Typische Klausuraufgaben}
+\textbf{1. Varianz direkt berechnen}
+
+Rezept:
+\begin{enumerate}
+  \item $E(X)$ berechnen
+  \item $E(X^2)$ berechnen
+  \item $\operatorname{Var}(X)=E(X^2)-E(X)^2$
+\end{enumerate}
+
+\textbf{2. Varianz von Summen}
+
+Wenn unabhaengig:
+\[
+\operatorname{Var}(X_1+\dots+X_n)=\operatorname{Var}(X_1)+\dots+\operatorname{Var}(X_n)
+\]
+
+\textbf{3. Standardabweichung}
+
+Einfach:
+\[
+\sigma=\sqrt{\operatorname{Var}(X)}
+\]
+
+\textbf{4. Abschaetzungen mit Tschebyscheff}
+
+Wenn gefragt wird ``mit welcher Wahrscheinlichkeit liegt $X$ hoechstens $c$ vom Mittelwert entfernt?'', dann:
+\[
+P(|X-\mu|<c)\ge 1-\frac{\sigma^2}{c^2}
+\]
+
+\subsection{Typische Fallen}
+\begin{itemize}
+  \item Varianz mit Standardabweichung verwechselt.
+  \item Bei $\operatorname{Var}(aX+b)$ das $a^2$ vergessen.
+  \item Bei Summen die Unabhaengigkeit stillschweigend angenommen.
+  \item $E(X^2)$ mit $(E(X))^2$ verwechselt.
+  \item Tschebyscheff als exakte Wahrscheinlichkeit statt als Schranke gelesen.
+\end{itemize}
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item $\displaystyle \operatorname{Var}(X)=E((X-\mu)^2)$
+  \item $\displaystyle \operatorname{Var}(X)=E(X^2)-E(X)^2$
+  \item $\displaystyle \sigma_X=\sqrt{\operatorname{Var}(X)}$
+  \item $\displaystyle \operatorname{Var}(aX+b)=a^2\operatorname{Var}(X)$
+  \item unabhaengig: $\displaystyle \operatorname{Var}(X+Y)=\operatorname{Var}(X)+\operatorname{Var}(Y)$
+  \item Bernoulli: $\displaystyle pq$
+  \item Binomial: $\displaystyle npq$
+  \item Geometrisch: $\displaystyle q/p^2$
+  \item Hypergeometrisch: $\displaystyle n\frac{M}{N}(1-\frac{M}{N})\frac{N-n}{N-1}$
+\end{itemize}
+
+\section{Kapitel 1.9: Kovarianz und Korrelation}
+
+\subsection{Grundidee}
+Jetzt geht es nicht mehr um die Streuung \emph{einer} Variablen, sondern um den Zusammenhang \emph{zweier} Variablen.
+
+\textbf{Fragen}
+\begin{itemize}
+  \item Gehen große Werte von $X$ oft mit großen Werten von $Y$ einher?
+  \item Oder eher mit kleinen Werten?
+  \item Wie stark ist dieser Zusammenhang?
+\end{itemize}
+
+\subsection{Kovarianz}
+Die Kovarianz ist definiert als
+\[
+\operatorname{cov}(X,Y)=E\big((X-\mu_X)(Y-\mu_Y)\big)
+\]
+
+\textbf{Interpretation des Vorzeichens}
+\begin{itemize}
+  \item $\operatorname{cov}(X,Y)>0$: eher gleichlaufend
+  \item $\operatorname{cov}(X,Y)<0$: eher gegenlaeufig
+  \item $\operatorname{cov}(X,Y)=0$: kein linearer Zusammenhang messbar
+\end{itemize}
+
+\textbf{Wichtig:}
+Korrelation bedeutet \textbf{nicht} Kausalitaet.
+
+\subsection{Wichtigste Umformung}
+\[
+\operatorname{cov}(X,Y)=E(XY)-E(X)E(Y)
+\]
+
+\textbf{Klausurregel:}
+Fast immer mit dieser Formel rechnen, nicht direkt mit $(X-\mu_X)(Y-\mu_Y)$ aufmachen.
+
+\subsection{Wichtige Regeln}
+\textbf{1. Bilinearitaet}
+\begin{align*}
+\operatorname{cov}(X_1+X_2,Y) &= \operatorname{cov}(X_1,Y)+\operatorname{cov}(X_2,Y) \\
+\operatorname{cov}(aX,Y) &= a\,\operatorname{cov}(X,Y)
+\end{align*}
+
+analog auch im zweiten Argument.
+
+\textbf{2. Symmetrie}
+\[
+\operatorname{cov}(X,Y)=\operatorname{cov}(Y,X)
+\]
+
+\textbf{3. Spezialfall Varianz}
+\[
+\operatorname{cov}(X,X)=\operatorname{Var}(X)
+\]
+
+\subsection{Unabhaengigkeit und Kovarianz}
+Wenn $X,Y$ unabhaengig sind, dann:
+\[
+\operatorname{cov}(X,Y)=0
+\]
+
+\textbf{Aber Achtung:}
+Die Umkehrung gilt im Allgemeinen \textbf{nicht}.
+
+\textbf{Merke:}
+Unabhaengig $\Rightarrow$ unkorreliert, aber unkorreliert $\nRightarrow$ unabhaengig.
+
+\subsection{Varianz von Summen mit Kovarianz}
+\[
+\operatorname{Var}(X+Y)=\operatorname{Var}(X)+\operatorname{Var}(Y)+2\operatorname{cov}(X,Y)
+\]
+
+Allgemeiner:
+\[
+\operatorname{Var}(X_1+\dots+X_n)
+=\sum_{i=1}^n \operatorname{Var}(X_i)
++2\sum_{1\le i<j\le n}\operatorname{cov}(X_i,X_j)
+\]
+
+Falls die $X_i$ paarweise unabhaengig sind:
+\[
+\operatorname{Var}(X_1+\dots+X_n)=\sum_{i=1}^n \operatorname{Var}(X_i)
+\]
+
+\subsection{Beispiel: Wuerfelsumme}
+Bei $n$ unabhaengigen fairen Wuerfeln:
+\[
+X=X_1+\dots+X_n
+\]
+
+\[
+E(X)=3.5n
+\]
+
+und wegen Unabhaengigkeit:
+\[
+\operatorname{Var}(X)=n\cdot \frac{35}{12}
+\]
+
+\subsection{Korrelation / Korrelationskoeffizient}
+Die Kovarianz haengt von der Skala ab. Deshalb normiert man:
+\[
+\rho(X,Y)=\frac{\operatorname{cov}(X,Y)}{\sigma_X\sigma_Y}
+\]
+
+vorausgesetzt $\sigma_X>0$ und $\sigma_Y>0$.
+
+\textbf{Eigenschaften}
+\[
+-1 \le \rho(X,Y)\le 1
+\]
+
+\textbf{Interpretation}
+\begin{itemize}
+  \item $\rho>0$: gleichlaufender linearer Zusammenhang
+  \item $\rho<0$: gegenlaeufiger linearer Zusammenhang
+  \item $|\rho|$ groß: starker linearer Zusammenhang
+  \item $\rho=0$: kein linearer Zusammenhang messbar
+\end{itemize}
+
+\subsection{Extremfaelle}
+\[
+\rho(X,Y)=1
+\]
+bedeutet: $Y$ ist fast sicher eine positiv lineare Funktion von $X$.
+
+\[
+\rho(X,Y)=-1
+\]
+bedeutet: $Y$ ist fast sicher eine negativ lineare Funktion von $X$.
+
+\textbf{Merke:}
+$\rho=0$ heisst nicht automatisch unabhaengig, sondern nur: kein \emph{linearer} Zusammenhang.
+
+\subsection{Standardisierung}
+Die standardisierte Variable ist:
+\[
+X^*=\frac{X-\mu_X}{\sigma_X}
+\]
+
+Dann gilt immer:
+\[
+E(X^*)=0,\qquad \operatorname{Var}(X^*)=1
+\]
+
+und
+\[
+\rho(X,Y)=\operatorname{cov}(X^*,Y^*)
+\]
+
+\subsection{Typische Klausuraufgaben}
+\textbf{1. Kovarianz berechnen}
+
+Rezept:
+\begin{enumerate}
+  \item $E(X)$ berechnen
+  \item $E(Y)$ berechnen
+  \item $E(XY)$ berechnen
+  \item $\operatorname{cov}(X,Y)=E(XY)-E(X)E(Y)$
+\end{enumerate}
+
+\textbf{2. Korrelation berechnen}
+
+Danach:
+\[
+\rho(X,Y)=\frac{\operatorname{cov}(X,Y)}{\sigma_X\sigma_Y}
+\]
+
+\textbf{3. Unabhaengigkeit pruefen}
+
+Nicht aus $\rho=0$ schliessen.
+Lieber direkt ueber gemeinsame Verteilung oder Definition pruefen.
+
+\subsection{Typische Fallen}
+\begin{itemize}
+  \item Korrelation mit Kausalitaet verwechselt.
+  \item Aus Kovarianz $0$ auf Unabhaengigkeit geschlossen.
+  \item Normierung mit Standardabweichung vergessen.
+  \item Bei Summen die Kovarianzterme vergessen.
+  \item $\rho=\pm 1$ falsch interpretiert.
+\end{itemize}
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item $\displaystyle \operatorname{cov}(X,Y)=E((X-\mu_X)(Y-\mu_Y))$
+  \item $\displaystyle \operatorname{cov}(X,Y)=E(XY)-E(X)E(Y)$
+  \item unabhaengig $\Rightarrow \operatorname{cov}(X,Y)=0$
+  \item $\displaystyle \operatorname{Var}(X+Y)=\operatorname{Var}(X)+\operatorname{Var}(Y)+2\operatorname{cov}(X,Y)$
+  \item $\displaystyle \rho(X,Y)=\frac{\operatorname{cov}(X,Y)}{\sigma_X\sigma_Y}$
+  \item $\displaystyle -1\le \rho(X,Y)\le 1$
+  \item $\rho=0$ bedeutet nur: unkorreliert, nicht automatisch unabhaengig
+\end{itemize}
+
+\section{Kapitel 1.10: Schwaches Gesetz der grossen Zahlen}
+
+\subsection{Grundidee}
+Wenn man ein Zufallsexperiment oft genug unabhaengig wiederholt, dann liegt das arithmetische Mittel der beobachteten Werte mit hoher Wahrscheinlichkeit nahe am Erwartungswert.
+
+\textbf{Anschaulich:}
+Viele Wiederholungen stabilisieren den Durchschnitt.
+
+\subsection{Situation}
+Sei $X$ eine Zufallsvariable mit
+\[
+E(X)=\mu,\qquad \operatorname{Var}(X)=\sigma^2
+\]
+
+Seien $X_1,\dots,X_n$ unabhaengige Realisierungen derselben Verteilung.
+
+Dann definiert man das Stichprobenmittel:
+\[
+Z_n=\frac1n\sum_{i=1}^n X_i
+\]
+
+\subsection{Erwartungswert und Varianz des Mittels}
+\[
+E(Z_n)=\mu
+\]
+
+\[
+\operatorname{Var}(Z_n)=\frac{\sigma^2}{n}
+\]
+
+\textbf{Merke:}
+Der Mittelwert bleibt gleich, aber die Streuung wird mit wachsendem $n$ kleiner.
+
+\subsection{Schwaches Gesetz der grossen Zahlen}
+Fuer jedes $c>0$ gilt:
+\[
+P(|Z_n-\mu|\ge c)\le \frac{\sigma^2}{n c^2}
+\]
+
+und daher
+\[
+\lim_{n\to\infty} P(|Z_n-\mu|\ge c)=0
+\]
+
+\textbf{Bedeutung:}
+Fuer jede feste Toleranz $c$ wird die Wahrscheinlichkeit einer groesseren Abweichung beliebig klein, wenn $n$ gross genug ist.
+
+\textbf{Merke:}
+Das ist die praezise mathematische Form von
+\[
+\text{``Durchschnitt } \approx \text{ Erwartungswert bei vielen Wiederholungen.''}
+\]
+
+\subsection{Woher kommt das?}
+Im Wesentlichen aus:
+\begin{itemize}
+  \item Linearitaet des Erwartungswerts
+  \item Varianz von Summen unabhaengiger Variablen
+  \item Tschebyscheff-Ungleichung
+\end{itemize}
+
+\subsection{Relative Haeufigkeit als Spezialfall}
+Sei $A$ ein Ereignis und $X_A$ seine Indikatorvariable:
+\[
+X_A(\omega)=
+\begin{cases}
+1,& \omega \in A \\
+0,& \omega \notin A
+\end{cases}
+\]
+
+Dann gilt:
+\[
+E(X_A)=P(A)=p
+\]
+
+und
+\[
+\operatorname{Var}(X_A)=p(1-p)=pq
+\]
+
+Bei $n$ Wiederholungen ist die relative Haeufigkeit
+\[
+r_n(A)=\frac{n_A}{n}
+\]
+gerade das arithmetische Mittel der Indikatorvariablen.
+
+\textbf{Also:}
+\[
+r_n(A)\approx p
+\]
+fuer grosses $n$.
+
+\subsection{Praezise Abschaetzung fuer relative Haeufigkeiten}
+Fuer jedes $c>0$ gilt:
+\[
+P(|r_n(A)-p|\ge c)\le \frac{pq}{n c^2}
+\]
+
+Da immer
+\[
+pq\le \frac14
+\]
+gilt, folgt die grobere, aber praktische Schranke:
+\[
+P(|r_n(A)-p|\ge c)\le \frac{1}{4nc^2}
+\]
+
+\textbf{Umgestellt:}
+\[
+P(|r_n(A)-p|<c)\ge 1-\frac{1}{4nc^2}
+\]
+
+\subsection{Wofuer ist das gut?}
+Damit kann man abschaetzen:
+\begin{itemize}
+  \item wie viele Wiederholungen noetig sind
+  \item um eine Wahrscheinlichkeit $p$ auf Genauigkeit $c$ zu schaetzen
+  \item mit vorgegebener Sicherheit
+\end{itemize}
+
+\subsection{Typische Klausurform}
+Gesucht ist oft ein moeglichst kleines $n$, so dass
+\[
+P(|r_n(A)-p|<c)\ge \alpha
+\]
+
+Mit der groben Schranke reicht:
+\[
+1-\frac{1}{4nc^2}\ge \alpha
+\]
+
+also
+\[
+\frac{1}{4nc^2}\le 1-\alpha
+\]
+
+und daraus $n$ ausrechnen.
+
+\subsection{Beispieltyp}
+``Mit mindestens $90\%$ Sicherheit soll die Abweichung hoechstens $0.05$ sein.''
+
+Dann:
+\[
+1-\frac{1}{4n\cdot 0.05^2}\ge 0.9
+\]
+
+und daraus folgt das benoetigte $n$.
+
+\subsection{Interpretation fuer Messungen}
+Wenn man eine physikalische Groesse mehrfach unabhaengig misst:
+\begin{itemize}
+  \item Einzelmessungen streuen
+  \item der Mittelwert vieler Messungen ist stabiler
+  \item die Unsicherheit des Mittels sinkt mit wachsendem $n$
+\end{itemize}
+
+\textbf{Merke:}
+Mehrfach messen bringt nicht magisch den exakten Wert, aber das arithmetische Mittel wird verlaesslicher.
+
+\subsection{Typische Fallen}
+\begin{itemize}
+  \item Schwaches Gesetz mit ``sicherer Konvergenz'' verwechseln.
+  \item Glauben, dass schon kleines $n$ automatisch gute Genauigkeit garantiert.
+  \item Relative Haeufigkeit mit Wahrscheinlichkeit exakt gleichsetzen.
+  \item $pq\le 1/4$ vergessen, wenn $p$ unbekannt ist.
+\end{itemize}
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item $\displaystyle Z_n=\frac1n\sum_{i=1}^n X_i$
+  \item $\displaystyle E(Z_n)=\mu$
+  \item $\displaystyle \operatorname{Var}(Z_n)=\frac{\sigma^2}{n}$
+  \item $\displaystyle P(|Z_n-\mu|\ge c)\le \frac{\sigma^2}{nc^2}$
+  \item relative Haeufigkeit ist Mittelwert von Indikatorvariablen
+  \item $\displaystyle P(|r_n(A)-p|\ge c)\le \frac{pq}{nc^2}\le \frac{1}{4nc^2}$
+\end{itemize}
+
+\section{Kapitel 1.11: Anwendungsbeispiele}
+
+\subsection{Worum es hier eigentlich geht}
+Das Kapitel bringt kaum neue Theorie, sondern zeigt, wie man das bisherige Zeug auf reale Modellierungen wirft.
+
+\textbf{Wichtig fuer die Klausur:}
+Nicht neue Formeln lernen, sondern erkennen:
+\begin{itemize}
+  \item Was ist die Ergebnismenge?
+  \item Was sind sinnvolle Ereignisse?
+  \item Wo steckt bedingte Wahrscheinlichkeit?
+  \item Wo braucht man totale Wahrscheinlichkeit / Bayes?
+  \item Wo steckt Binomialverteilung / Erwartungswert / Tschebyscheff?
+\end{itemize}
+
+\subsection{Beispiel Uebertragungskanal}
+Typische Modellierung:
+\begin{itemize}
+  \item Senderalphabet:
+  \[
+  S=\{s_1,\dots,s_m\}
+  \]
+  \item Empfaengeralphabet:
+  \[
+  E=\{e_1,\dots,e_n\}
+  \]
+  \item Ergebnismenge:
+  \[
+  \Omega=S\times E
+  \]
+\end{itemize}
+
+Ereignisse:
+\begin{align*}
+S_i &= \{\text{$s_i$ wurde gesendet}\} \\
+E_j &= \{\text{$e_j$ wurde empfangen}\}
+\end{align*}
+
+\subsection{Wichtige Groessen beim Kanal}
+\textbf{1. A-priori-Wahrscheinlichkeiten}
+\[
+p_i=P(S_i)
+\]
+
+\textbf{2. Kanalwahrscheinlichkeiten}
+\[
+p_{ij}=P(E_j\mid S_i)
+\]
+
+Das ist eine Matrix bedingter Wahrscheinlichkeiten.
+
+\textbf{Wichtige Bedingung}
+Fuer jedes feste $i$:
+\[
+\sum_{j=1}^n p_{ij}=1
+\]
+
+\textbf{Merke:}
+Eine Zeile = gesendetes Zeichen fest, dann muessen sich die Empfangswahrscheinlichkeiten zu $1$ summieren.
+
+\subsection{Gemeinsame Wahrscheinlichkeiten}
+Mit Multiplikationssatz:
+\[
+P(S_i \cap E_j)=P(E_j\mid S_i)\,P(S_i)=p_{ij}p_i
+\]
+
+\subsection{Empfangswahrscheinlichkeiten}
+Mit totaler Wahrscheinlichkeit:
+\[
+P(E_j)=\sum_{i=1}^m P(E_j\mid S_i)P(S_i)=\sum_{i=1}^m p_{ij}p_i
+\]
+
+\subsection{Rueckschluss auf gesendetes Zeichen}
+Mit Bayes:
+\[
+P(S_i\mid E_j)=\frac{P(E_j\mid S_i)P(S_i)}{P(E_j)}
+=\frac{p_{ij}p_i}{\sum_{k=1}^m p_{kj}p_k}
+\]
+
+\textbf{Klausurregel:}
+Wenn gefragt wird ``welches Zeichen wurde wahrscheinlich gesendet, wenn $e_j$ empfangen wurde?'', dann Bayes.
+
+\subsection{Entscheidungsfunktion}
+Eine Entscheidungsfunktion
+\[
+\varphi(j)
+\]
+sagt:
+``Wenn $e_j$ empfangen wird, vermuten wir $s_{\varphi(j)}$ als gesendet.''
+
+\textbf{Bestes Prinzip}
+Waehle fuer jedes $j$ das $i$, fuer das
+\[
+P(S_i\mid E_j)
+\]
+maximal ist.
+
+\textbf{Merke:}
+Bei gegebener Empfangsbeobachtung nimmt man den wahrscheinlichsten Senderzustand.
+
+\subsection{Fehlerwahrscheinlichkeit}
+Wenn $K$ = ``korrekt entschieden'', dann:
+\[
+P(K)=\sum_j P(S_{\varphi(j)}\cap E_j)
+\]
+
+und
+\[
+P(\text{Fehler})=1-P(K)
+\]
+
+\subsection{Viele Uebertragungen}
+Bei $n$ unabhaengigen Uebertragungen und Fehlerwahrscheinlichkeit $p_f$ pro Zeichen:
+\[
+X=\text{Anzahl Fehler}
+\sim \operatorname{Bin}(n,p_f)
+\]
+
+Dann:
+\[
+E(X)=np_f,\qquad \operatorname{Var}(X)=np_f(1-p_f)
+\]
+
+und fuer Abschaetzungen grosser Abweichungen kann Tschebyscheff benutzt werden.
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item Kanalmatrix = bedingte Wahrscheinlichkeiten $P(E_j\mid S_i)$
+  \item gemeinsame Wkt.: Multiplikationssatz
+  \item Empfangswkt.: totale Wahrscheinlichkeit
+  \item Rueckschluss Sender aus Empfang: Bayes
+  \item viele Fehler in Folge: Binomialverteilung
+\end{itemize}
+
+\section{Kapitel 2.1: Allgemeine Wahrscheinlichkeitsraeume}
+
+\subsection{Warum reicht der diskrete Fall nicht mehr?}
+In Kapitel 1 war $\Omega$ endlich oder abz\"ahlbar unendlich.
+
+Das reicht nicht fuer Groessen wie:
+\begin{itemize}
+  \item Lebensdauer eines Atomkerns
+  \item Abfuellmenge einer Flasche
+  \item Messfehler
+  \item beliebige reelle Messwerte
+\end{itemize}
+
+Da liegen die moeglichen Werte oft in Intervallen wie
+\[
+[0,\infty),\qquad \mathbb{R},\qquad [a,b]
+\]
+und das ist ueberabzaehlbar.
+
+\subsection{Was aendert sich?}
+Im allgemeinen Fall nimmt man nicht mehr einfach alle Teilmengen von $\Omega$ als Ereignisse.
+
+Stattdessen:
+\begin{itemize}
+  \item $\Omega$ = Ergebnismenge
+  \item $\mathcal A$ = Menge der zulaessigen Ereignisse
+  \item $P:\mathcal A \to [0,1]$ = Wahrscheinlichkeitsmass
+\end{itemize}
+
+Der allgemeine Wahrscheinlichkeitsraum ist also:
+\[
+(\Omega,\mathcal A,P)
+\]
+
+\subsection{Sigma-Algebra}
+$\mathcal A$ heisst Ereignis-$\sigma$-Algebra.
+
+Fuer die Klausur reicht im Grunde:
+\begin{itemize}
+  \item $\Omega \in \mathcal A$
+  \item $\emptyset \in \mathcal A$
+  \item mit einem Ereignis auch sein Komplement
+  \item mit abz\"ahlbar vielen Ereignissen auch deren Vereinigung und Durchschnitt
+\end{itemize}
+
+\textbf{Merke:}
+Eine $\sigma$-Algebra ist einfach ein Ereignissystem, mit dem man sauber weiterrechnen kann.
+
+\subsection{Borel-Sigma-Algebra}
+Fuer Zufallsvariablen mit Werten in $\mathbb R$ nimmt man typischerweise die Borel-$\sigma$-Algebra
+\[
+\mathcal B(\mathbb R)
+\]
+
+Die enthaelt insbesondere:
+\begin{itemize}
+  \item alle Intervalle
+  \item alle einpunktigen Mengen $\{x\}$
+  \item alle endlichen und abz\"ahlbaren Teilmengen von $\mathbb R$
+\end{itemize}
+
+\textbf{Merke:}
+Praktisch relevante Ereignisse wie
+\[
+X\le b,\quad a<X\le b,\quad X\in [a,b]
+\]
+sind damit sauber zulaessig.
+
+\subsection{Allgemeine Zufallsvariable}
+Im allgemeinen Fall ist eine Zufallsvariable eine Abbildung
+\[
+X:\Omega\to \mathbb R
+\]
+mit der Eigenschaft, dass fuer jedes Borel-Ereignis $A \in \mathcal B(\mathbb R)$ gilt:
+\[
+X^{-1}(A)\in \mathcal A
+\]
+
+\textbf{Bedeutung:}
+Man darf alle Ereignisse der Form
+\[
+\{X\in A\}
+\]
+wahrscheinlichkeitstheoretisch auswerten.
+
+\subsection{Verteilung von $X$}
+Wie vorher:
+\[
+P_X(A)=P(X\in A)
+\qquad \text{fuer } A\in \mathcal B(\mathbb R)
+\]
+
+\textbf{Wichtig:}
+Die Idee aus Kapitel 1 bleibt gleich. Nur die erlaubten Mengen werden sauberer formuliert.
+
+\subsection{Diskret vs. allgemein}
+\textbf{Diskrete Zufallsvariable}
+\begin{itemize}
+  \item Wertemenge endlich oder abz\"ahlbar
+  \item Beschreibung oft ueber Wahrscheinlichkeitsfunktion $p(x)$
+\end{itemize}
+
+\textbf{Allgemeiner / stetiger Fall}
+\begin{itemize}
+  \item Wertemenge oft Intervall oder ganz $\mathbb R$
+  \item Beschreibung spaeter ueber Verteilungsfunktion bzw. Dichte
+\end{itemize}
+
+\subsection{Unabhaengigkeit im allgemeinen Fall}
+Zwei Zufallsvariablen $X,Y$ sind unabhaengig, wenn fuer alle Borel-Mengen $A,B$ gilt:
+\[
+P(X\in A,\;Y\in B)=P(X\in A)\cdot P(Y\in B)
+\]
+
+Oft reicht es im stetigen Kontext zu denken an:
+\[
+P(X\le a,\;Y\le b)=P(X\le a)\cdot P(Y\le b)
+\]
+
+\subsection{Was bleibt gleich?}
+Fast alle Konzepte aus Kapitel 1 bleiben inhaltlich gleich:
+\begin{itemize}
+  \item Ereignisse
+  \item bedingte Wahrscheinlichkeit
+  \item Unabhaengigkeit
+  \item Erwartungswert
+  \item Varianz
+\end{itemize}
+
+Nur die technische Sprache wird etwas praeziser.
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item allgemein: $\displaystyle (\Omega,\mathcal A,P)$
+  \item nicht mehr jede Teilmenge muss Ereignis sein
+  \item fuer reelle Werte wichtig: Borel-$\sigma$-Algebra $\mathcal B(\mathbb R)$
+  \item Zufallsvariable muss Borel-Ereignisse auf Ereignisse in $\Omega$ zurueckfuehren
+  \item Inhaltlich bleibt fast alles aus Kapitel 1 erhalten
+\end{itemize}
+
+\section{Kapitel 2.2: Dichte und Verteilungsfunktion}
+
+\subsection{Verteilungsfunktion}
+Zu einer Zufallsvariablen $X$ gehoert die Verteilungsfunktion
+\[
+F_X(x)=P(X\le x)
+\]
+
+Oft kurz:
+\[
+F(x)=P(X\le x)
+\]
+
+\textbf{Bedeutung:}
+Sie sagt fuer jedes $x$, mit welcher Wahrscheinlichkeit $X$ hoechstens $x$ ist.
+
+\subsection{Wahrscheinlichkeiten aus $F$ ablesen}
+\[
+P(a<X\le b)=F(b)-F(a)
+\]
+
+allgemeiner:
+\begin{align*}
+P(a<X<b) &= F(b^-)-F(a) \\
+P(a\le X<b) &= F(b^-)-F(a^-) \\
+P(a\le X\le b) &= F(b)-F(a^-)
+\end{align*}
+
+\textbf{Im stetigen Fall} vereinfacht sich das spaeter stark, weil dann Punktwahrscheinlichkeiten $0$ sind.
+
+\subsection{Eigenschaften jeder Verteilungsfunktion}
+Fuer jede Verteilungsfunktion gilt:
+\begin{itemize}
+  \item $0\le F(x)\le 1$
+  \item $F$ ist monoton wachsend
+  \item $\lim_{x\to -\infty}F(x)=0$
+  \item $\lim_{x\to \infty}F(x)=1$
+  \item $F$ ist rechtsstetig
+\end{itemize}
+
+\subsection{Spruenge und Punktwahrscheinlichkeiten}
+\[
+P(X=x)=F(x)-F(x^-)
+\]
+
+\textbf{Merke:}
+Die Sprunghoehe bei $x$ ist genau die Wahrscheinlichkeit der Stelle $x$.
+
+Also:
+\begin{itemize}
+  \item Sprung vorhanden $\Rightarrow P(X=x)>0$
+  \item keine Spruenge / stetig an $x$ $\Rightarrow P(X=x)=0$
+\end{itemize}
+
+\subsection{Stetige Zufallsvariable}
+$X$ heisst stetig, wenn es eine Dichte $f$ gibt mit
+\[
+F(x)=\int_{-\infty}^x f(u)\,du
+\]
+
+Dann ist $f$ die Wahrscheinlichkeitsdichte von $X$.
+
+\subsection{Wahrscheinlichkeiten mit Dichte}
+Wenn $X$ Dichte $f$ hat, dann:
+\[
+P(X\le x)=F(x)=\int_{-\infty}^x f(u)\,du
+\]
+
+und
+\[
+P(a<X\le b)=\int_a^b f(u)\,du
+\]
+
+\textbf{Grafische Bedeutung:}
+Wahrscheinlichkeiten sind Flaechen unter der Dichte.
+
+\subsection{Wichtige Eigenschaften einer Dichte}
+Eine Dichte $f$ muss erfuellen:
+\[
+f(x)\ge 0
+\quad \text{(fast ueberall)}
+\]
+
+und
+\[
+\int_{-\infty}^{\infty} f(x)\,dx=1
+\]
+
+\textbf{Merke:}
+Eine Dichte ist keine Wahrscheinlichkeit an einer Stelle, sondern eine Flaechendichte.
+
+\subsection{Extrem wichtig}
+Bei stetigen Zufallsvariablen gilt:
+\[
+P(X=x)=0
+\quad \text{fuer alle } x
+\]
+
+Deshalb:
+\[
+P(a\le X\le b)=P(a<X\le b)=P(a<X<b)=P(a\le X<b)
+\]
+
+\textbf{Merke:}
+Bei stetigen Variablen sind die Randklammern egal.
+
+\subsection{Zusammenhang zwischen Dichte und Verteilungsfunktion}
+Wenn $F$ differenzierbar ist, dann:
+\[
+f(x)=F'(x)
+\]
+
+und umgekehrt:
+\[
+F(x)=\int_{-\infty}^x f(u)\,du
+\]
+
+\textbf{Kurzmerksatz}
+\begin{itemize}
+  \item Dichte integrieren $\Rightarrow$ Verteilungsfunktion
+  \item Verteilungsfunktion ableiten $\Rightarrow$ Dichte
+\end{itemize}
+
+\subsection{Stetige Gleichverteilung auf $[a,b]$}
+Dichte:
+\[
+f(x)=
+\begin{cases}
+\frac{1}{b-a},& x\in [a,b] \\
+0,& \text{sonst}
+\end{cases}
+\]
+
+Verteilungsfunktion:
+\[
+F(x)=
+\begin{cases}
+0,& x<a \\
+\frac{x-a}{b-a},& a\le x\le b \\
+1,& x>b
+\end{cases}
+\]
+
+\textbf{Merke:}
+Bei Gleichverteilung auf $[a,b]$ ist Wahrscheinlichkeit proportional zur Intervalllaenge.
+
+Also:
+\[
+P(c\le X\le d)=\frac{d-c}{b-a}
+\qquad \text{fuer } a\le c\le d\le b
+\]
+
+\subsection{Exponentialverteilung}
+Mit Parameter $\lambda>0$:
+
+\[
+f(x)=
+\begin{cases}
+0,& x<0 \\
+\lambda e^{-\lambda x},& x\ge 0
+\end{cases}
+\]
+
+\[
+F(x)=
+\begin{cases}
+0,& x<0 \\
+1-e^{-\lambda x},& x\ge 0
+\end{cases}
+\]
+
+\textbf{Wichtig:}
+\[
+P(X\ge a)=1-F(a)=e^{-\lambda a}
+\qquad (a\ge 0)
+\]
+
+\textbf{Merke:}
+Exponentialverteilung modelliert Wartezeiten und ist das stetige Pendant zur geometrischen Verteilung.
+
+\subsection{Gedaechtnislosigkeit}
+Die Exponentialverteilung ist gedaechtnislos:
+\[
+P(X>n+m\mid X>n)=P(X>m)
+\]
+
+\textbf{Merke:}
+Schon lange gewartet zu haben macht das baldige Eintreten nicht wahrscheinlicher.
+
+\subsection{Diskret vs. stetig}
+\textbf{Diskret}
+\begin{itemize}
+  \item Wahrscheinlichkeitsfunktion $p(x)$
+  \item Wahrscheinlichkeiten durch Summen
+\end{itemize}
+
+\textbf{Stetig}
+\begin{itemize}
+  \item Dichte $f(x)$
+  \item Wahrscheinlichkeiten durch Integrale
+\end{itemize}
+
+\textbf{Analogie}
+\[
+P(a\le X\le b)=\sum_{x\in[a,b]} p(x)
+\qquad \text{vs.} \qquad
+P(a\le X\le b)=\int_a^b f(x)\,dx
+\]
+
+\subsection{Typische Klausuraufgaben}
+\textbf{1. Ist $f$ eine Dichte?}
+
+Pruefen:
+\begin{enumerate}
+  \item $f(x)\ge 0$
+  \item $\int_{-\infty}^{\infty} f(x)\,dx=1$
+\end{enumerate}
+
+\textbf{2. Aus $f$ die Verteilungsfunktion bauen}
+
+Immer:
+\[
+F(x)=\int_{-\infty}^x f(u)\,du
+\]
+
+\textbf{3. Aus $F$ Wahrscheinlichkeiten berechnen}
+
+Z.B.:
+\[
+P(a<X\le b)=F(b)-F(a)
+\]
+
+\textbf{4. Gleichverteilung auf Intervall}
+
+Einfach ueber Intervalllaengen.
+
+\subsection{Typische Fallen}
+\begin{itemize}
+  \item Dichtewert $f(x)$ als Wahrscheinlichkeit $P(X=x)$ missverstanden.
+  \item Vergessen, dass bei stetigen Variablen $P(X=x)=0$ gilt.
+  \item Bei Gleichverteilung auf $[a,b]$ falsche Hoehe der Dichte genommen.
+  \item Bei Exponentialverteilung Vorzeichen im Exponenten vergeigt.
+  \item Verteilungsfunktion muss monoton sein und zwischen $0$ und $1$ liegen.
+\end{itemize}
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item $\displaystyle F(x)=P(X\le x)$
+  \item jede Verteilungsfunktion ist monoton wachsend, rechtsstetig, geht von $0$ nach $1$
+  \item $\displaystyle P(X=x)=F(x)-F(x^-)$
+  \item stetig mit Dichte: $\displaystyle F(x)=\int_{-\infty}^x f(u)\,du$
+  \item $\displaystyle P(a<X\le b)=\int_a^b f(u)\,du$
+  \item bei stetigen Variablen: $\displaystyle P(X=x)=0$
+  \item Gleichverteilung auf $[a,b]$: Dichte $1/(b-a)$
+  \item Exponentialverteilung: $\displaystyle f(x)=\lambda e^{-\lambda x}$ fuer $x\ge 0$
+\end{itemize}
+
+\section{Kapitel 2.3: Die Normalverteilung}
+
+\subsection{Warum wichtig?}
+Die Normalverteilung taucht dauernd auf:
+\begin{itemize}
+  \item Messfehler
+  \item technische Fertigungsmaße
+  \item Summen vieler kleiner Einfluesse
+  \item Approximation anderer Verteilungen
+\end{itemize}
+
+\subsection{Standardnormalverteilung}
+Die Standardnormalverteilung ist
+\[
+\mathcal N(0,1)
+\]
+
+Dichte:
+\[
+\varphi(x)=\frac{1}{\sqrt{2\pi}}e^{-x^2/2}
+\]
+
+Verteilungsfunktion:
+\[
+\Phi(x)=P(X\le x)=\int_{-\infty}^x \varphi(u)\,du
+\]
+
+\textbf{Wichtig:}
+$\Phi$ hat keine elementare Stammfunktion, deshalb arbeitet man mit Tabellen oder Rechner.
+
+\subsection{Allgemeine Normalverteilung}
+\[
+X\sim \mathcal N(\mu,\sigma^2)
+\qquad (\sigma>0)
+\]
+
+Dichte:
+\[
+f(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+\]
+
+\textbf{Parameterbedeutung}
+\begin{itemize}
+  \item $\mu$ = Mittelwert / Lagezentrum
+  \item $\sigma$ = Standardabweichung / Streuung
+\end{itemize}
+
+\subsection{Standardisierung}
+Der wichtigste Schritt bei fast jeder Aufgabe:
+\[
+Z=\frac{X-\mu}{\sigma}
+\]
+
+Dann gilt:
+\[
+Z\sim \mathcal N(0,1)
+\]
+
+\textbf{Klausurregel:}
+Bei Normalverteilungsaufgaben fast immer zuerst standardisieren und dann auf $\Phi$ gehen.
+
+\subsection{Wahrscheinlichkeiten berechnen}
+Wenn $X\sim \mathcal N(\mu,\sigma^2)$, dann:
+\[
+P(X\le x)=\Phi\left(\frac{x-\mu}{\sigma}\right)
+\]
+
+\[
+P(a\le X\le b)=\Phi\left(\frac{b-\mu}{\sigma}\right)-\Phi\left(\frac{a-\mu}{\sigma}\right)
+\]
+
+\[
+P(X>a)=1-\Phi\left(\frac{a-\mu}{\sigma}\right)
+\]
+
+\subsection{Symmetrie der Standardnormalverteilung}
+Wegen Achsensymmetrie gilt:
+\[
+\Phi(-x)=1-\Phi(x)
+\]
+
+\textbf{Sehr nuetzlich:}
+Tabellen enthalten oft nur Werte fuer $x\ge 0$.
+
+\subsection{Typische Standardaufgaben}
+\textbf{1. Wahrscheinlichkeit in Intervall}
+
+Rezept:
+\begin{enumerate}
+  \item standardisieren
+  \item auf $\Phi$ zurueckfuehren
+  \item tabellieren / ablesen / rechnen
+\end{enumerate}
+
+\textbf{2. Wahrscheinlichkeit ausserhalb von Toleranzen}
+
+Fast immer ueber Gegenereignis:
+\[
+P(|X-\mu|>c)=1-P(\mu-c\le X\le \mu+c)
+\]
+
+\textbf{3. Gesuchten Grenzwert $c$ bestimmen}
+
+Wenn z.B.
+\[
+P(X\ge c)=0.3
+\]
+dann:
+\[
+1-\Phi\left(\frac{c-\mu}{\sigma}\right)=0.3
+\]
+
+also
+\[
+\Phi\left(\frac{c-\mu}{\sigma}\right)=0.7
+\]
+und dann aus Tabelle / inverse $\Phi$ das Quantil holen.
+
+\subsection{$3\sigma$-Regel}
+Fuer normalverteilte Variablen gilt naeherungsweise:
+\[
+P(\mu-3\sigma\le X\le \mu+3\sigma)\approx 0.997
+\]
+
+\textbf{Merke:}
+Fast alles liegt innerhalb von drei Standardabweichungen.
+
+\subsection{Linearkombinationen normalverteilter Variablen}
+Sind $X_1,\dots,X_n$ unabhaengig und normalverteilt, dann ist auch
+\[
+X=a_1X_1+\dots+a_nX_n
+\]
+normalverteilt.
+
+Genauer:
+\[
+X\sim \mathcal N(\mu,\sigma^2)
+\]
+mit
+\[
+\mu=a_1\mu_1+\dots+a_n\mu_n
+\]
+
+\[
+\sigma^2=a_1^2\sigma_1^2+\dots+a_n^2\sigma_n^2
+\]
+
+\textbf{Spezialfall Summe}
+Falls $X_1,X_2$ unabhaengig:
+\[
+X_1+X_2 \sim \mathcal N(\mu_1+\mu_2,\sigma_1^2+\sigma_2^2)
+\]
+
+\textbf{Spezialfall Differenz}
+\[
+X_1-X_2 \sim \mathcal N(\mu_1-\mu_2,\sigma_1^2+\sigma_2^2)
+\]
+
+\subsection{Typische Beispiele}
+\textbf{1. Toleranzaufgabe}
+Wenn
+\[
+X\sim \mathcal N(152,4)
+\]
+und Toleranz $\pm 5$, dann:
+\[
+P(147\le X\le 157)
+=P\left(-2.5\le \frac{X-152}{2}\le 2.5\right)
+=\Phi(2.5)-\Phi(-2.5)
+\]
+
+\textbf{2. Gewicht zweier Komponenten}
+Wenn
+\[
+X_1\sim \mathcal N(50,1),\qquad X_2\sim \mathcal N(20,0.5)
+\]
+unabhaengig, dann:
+\[
+X_1+X_2 \sim \mathcal N(70,1.5)
+\]
+
+\subsection{Typische Fallen}
+\begin{itemize}
+  \item $\sigma$ und $\sigma^2$ verwechselt.
+  \item Beim Standardisieren durch $\sigma^2$ statt durch $\sigma$ geteilt.
+  \item Symmetrieformel falsch herum benutzt.
+  \item Bei Summen normalverteilter Variablen die Varianzen falsch addiert.
+  \item Toleranzaufgaben nicht ueber Gegenereignis gerechnet.
+\end{itemize}
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item Standardnormal: $\displaystyle \varphi(x)=\frac{1}{\sqrt{2\pi}}e^{-x^2/2}$
+  \item $\displaystyle X\sim \mathcal N(\mu,\sigma^2)\Rightarrow Z=\frac{X-\mu}{\sigma}\sim \mathcal N(0,1)$
+  \item $\displaystyle P(X\le x)=\Phi\left(\frac{x-\mu}{\sigma}\right)$
+  \item $\displaystyle P(a\le X\le b)=\Phi\left(\frac{b-\mu}{\sigma}\right)-\Phi\left(\frac{a-\mu}{\sigma}\right)$
+  \item $\displaystyle \Phi(-x)=1-\Phi(x)$
+  \item Summe unabhaengiger Normalvariablen bleibt normalverteilt
+\end{itemize}
+
+\section{Kapitel 2.4: Erwartungswert und Varianz bei stetigen Zufallsvariablen}
+
+\subsection{Erwartungswert}
+Hat $X$ eine Dichte $f$, dann gilt
+\[
+E(X)=\int_{-\infty}^{\infty} x\,f(x)\,dx
+\]
+falls das Integral existiert.
+
+\textbf{Merke:}
+Das ist das stetige Analogon zu
+\[
+E(X)=\sum_x x\cdot P(X=x).
+\]
+
+\subsection{Rechnen mit Funktionen von $X$}
+Ist $Y=g(X)$, dann gilt
+\[
+E(g(X))=\int_{-\infty}^{\infty} g(x)\,f_X(x)\,dx
+\]
+falls das Integral existiert.
+
+\textbf{Extrem wichtig:}
+Du brauchst dafuer meist \textbf{nicht} erst die Dichte von $Y=g(X)$.
+
+\subsection{Varianz}
+Mit $\mu=E(X)$:
+\[
+D^2(X)=\operatorname{Var}(X)=E\bigl((X-\mu)^2\bigr)
+\]
+
+also bei Dichte $f$:
+\[
+D^2(X)=\int_{-\infty}^{\infty} (x-\mu)^2 f(x)\,dx
+\]
+
+und
+\[
+\sigma=\sqrt{D^2(X)}.
+\]
+
+\subsection{Wichtige Umformung}
+Wie im diskreten Fall:
+\[
+D^2(X)=E(X^2)-\mu^2
+\]
+mit
+\[
+E(X^2)=\int_{-\infty}^{\infty} x^2 f(x)\,dx.
+\]
+
+\textbf{Merke:}
+Fuer Rechnungen ist oft
+\[
+\operatorname{Var}(X)=E(X^2)-E(X)^2
+\]
+am schnellsten.
+
+\subsection{Rechenregeln}
+Die bekannten Regeln aus den diskreten Kapiteln bleiben gueltig:
+\begin{itemize}
+  \item $E(aX+b)=aE(X)+b$
+  \item $D^2(aX+b)=a^2D^2(X)$
+  \item $E(X+Y)=E(X)+E(Y)$
+  \item bei Unabhaengigkeit: $E(XY)=E(X)E(Y)$
+  \item $\operatorname{Var}(X+Y)=\operatorname{Var}(X)+\operatorname{Var}(Y)$ bei Unabhaengigkeit
+\end{itemize}
+
+\subsection{Standardwerte}
+\textbf{Stetige Gleichverteilung auf $[a,b]$}
+\[
+E(X)=\frac{a+b}{2},\qquad D^2(X)=\frac{(b-a)^2}{12}
+\]
+
+\textbf{Exponentialverteilung mit Parameter $\lambda$}
+\[
+E(X)=\frac1\lambda,\qquad D^2(X)=\frac1{\lambda^2}
+\]
+
+\textbf{Normalverteilung $X\sim \mathcal N(\mu,\sigma^2)$}
+\[
+E(X)=\mu,\qquad D^2(X)=\sigma^2
+\]
+
+\subsection{Typische Klausuraufgaben}
+\textbf{1. Erwartungswert aus Dichte berechnen}
+\begin{enumerate}
+  \item Dichte $f(x)$ sauber mit Intervall hinschreiben
+  \item Integral $\int x f(x)\,dx$ ueber dem Traeger bilden
+  \item sauber auswerten
+\end{enumerate}
+
+\textbf{2. Varianz aus Dichte berechnen}
+\begin{enumerate}
+  \item erst $\mu=E(X)$
+  \item dann entweder $\int (x-\mu)^2f(x)\,dx$ oder $E(X^2)-\mu^2$
+  \item am Ende $\sigma=\sqrt{\operatorname{Var}(X)}$
+\end{enumerate}
+
+\textbf{3. Erwartungswert von $g(X)$}
+\[
+E(g(X))=\int g(x)f_X(x)\,dx
+\]
+direkt benutzen.
+
+\subsection{Typische Fallen}
+\begin{itemize}
+  \item ueber ganz $\mathbb R$ integriert, obwohl die Dichte nur auf einem Intervall ungleich $0$ ist.
+  \item $E(g(X))$ berechnet, aber vorher unnoetig die Verteilung von $g(X)$ gesucht.
+  \item Varianz mit Standardabweichung verwechselt.
+  \item Dichte nicht erst auf Normierung geprueft, wenn eine Konstante $c$ vorkommt.
+\end{itemize}
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item $\displaystyle E(X)=\int x f(x)\,dx$
+  \item $\displaystyle E(g(X))=\int g(x)f_X(x)\,dx$
+  \item $\displaystyle \operatorname{Var}(X)=\int (x-\mu)^2f(x)\,dx$
+  \item $\displaystyle \operatorname{Var}(X)=E(X^2)-E(X)^2$
+  \item $\displaystyle U[a,b]: E=\frac{a+b}{2},\ \operatorname{Var}=\frac{(b-a)^2}{12}$
+  \item $\displaystyle \operatorname{Exp}(\lambda): E=\frac1\lambda,\ \operatorname{Var}=\frac1{\lambda^2}$
+\end{itemize}
+
+\section{Kapitel 2.5: Grenzwertsaetze}
+
+\subsection{de Moivre-Laplace: Binomial $\approx$ Normal}
+Wenn
+\[
+X\sim \operatorname{Bin}(n,p)
+\]
+und $n$ gross ist, dann kann man $X$ durch eine Normalverteilung ann\"ahern.
+
+\textbf{Parameter der passenden Normalverteilung}
+\[
+\mu=np,\qquad \sigma^2=npq
+\]
+
+mit
+\[
+q=1-p
+\]
+
+\subsection{Standardisierte Form}
+Man betrachtet:
+\[
+X^*=\frac{X-np}{\sqrt{npq}}
+\]
+
+Dann gilt fuer grosses $n$:
+\[
+X^* \approx \mathcal N(0,1)
+\]
+
+\textbf{Also praktisch:}
+\[
+P(X\le x)\approx \Phi\left(\frac{x-np}{\sqrt{npq}}\right)
+\]
+
+\subsection{Stetigkeitskorrektur}
+Weil die Binomialverteilung diskret und die Normalverteilung stetig ist, verbessert man die Approximation oft durch $\pm 0.5$.
+
+\textbf{Wichtigste Formeln}
+\[
+P(X\le k)\approx \Phi\left(\frac{k+0.5-np}{\sqrt{npq}}\right)
+\]
+
+\[
+P(X\ge k)\approx 1-\Phi\left(\frac{k-0.5-np}{\sqrt{npq}}\right)
+\]
+
+\[
+P(k\le X\le l)\approx
+\Phi\left(\frac{l+0.5-np}{\sqrt{npq}}\right)
+-\Phi\left(\frac{k-0.5-np}{\sqrt{npq}}\right)
+\]
+
+\textbf{Merke:}
+\begin{itemize}
+  \item obere Grenze bekommt meist $+0.5$
+  \item untere Grenze bekommt meist $-0.5$
+\end{itemize}
+
+\subsection{Wann ist die Approximation brauchbar?}
+Faustregel aus dem Blatt:
+\[
+npq\ge 9
+\]
+
+\textbf{Merke:}
+Wenn die Varianz zu klein ist, ist die Normalapproximation oft murks.
+
+\subsection{Typische Klausuraufgaben}
+\textbf{1. Binomialwahrscheinlichkeit approximieren}
+
+Rezept:
+\begin{enumerate}
+  \item $\mu=np$, $\sigma=\sqrt{npq}$
+  \item passende Stetigkeitskorrektur setzen
+  \item standardisieren
+  \item mit $\Phi$ ausrechnen
+\end{enumerate}
+
+\textbf{2. Mindestens / hoechstens / zwischen}
+
+Sauber in Intervallform bringen und dann die richtige $\pm 0.5$-Korrektur setzen.
+
+\subsection{Typische Fallen}
+\begin{itemize}
+  \item Stetigkeitskorrektur vergessen.
+  \item $\sigma=\sqrt{npq}$ mit $\sigma^2=npq$ verwechselt.
+  \item Approximation benutzt, obwohl $npq$ zu klein ist.
+  \item Bei ``mindestens'' und ``hoechstens'' die falsche Grenze korrigiert.
+\end{itemize}
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item $\displaystyle X\sim \operatorname{Bin}(n,p)\approx \mathcal N(np,npq)$
+  \item $\displaystyle Z=\frac{X-np}{\sqrt{npq}}$
+  \item mit Stetigkeitskorrektur arbeiten
+  \item Faustregel: $\displaystyle npq\ge 9$
+\end{itemize}
+
+\section{Kapitel 3.1: Statistik-Ueberblick}
+
+\subsection{Wichtigste Grundbegriffe}
+\textbf{Grundgesamtheit}
+\begin{itemize}
+  \item Menge aller Objekte, fuer die man sich interessiert
+\end{itemize}
+
+\textbf{Statistische Einheit}
+\begin{itemize}
+  \item ein einzelnes Element der Grundgesamtheit
+\end{itemize}
+
+\textbf{Merkmal}
+\begin{itemize}
+  \item eine beobachtete Eigenschaft einer statistischen Einheit
+\end{itemize}
+
+\textbf{Auspraegung / Wert}
+\begin{itemize}
+  \item konkreter Wert, den das Merkmal annimmt
+\end{itemize}
+
+\textbf{Stichprobe}
+\begin{itemize}
+  \item die tatsaechlich untersuchten Einheiten
+\end{itemize}
+
+\subsection{Uni-, bi-, multivariat}
+\begin{itemize}
+  \item \textbf{univariat}: ein Merkmal
+  \item \textbf{bivariat}: zwei Merkmale
+  \item \textbf{multivariat}: mehrere Merkmale
+\end{itemize}
+
+\subsection{Skalenniveaus}
+\textbf{Nominal skaliert}
+\begin{itemize}
+  \item nur gleich / verschieden
+  \item Beispiel: Geschlecht
+\end{itemize}
+
+\textbf{Ordinal skaliert}
+\begin{itemize}
+  \item Reihenfolge moeglich
+  \item Abstaende nicht sinnvoll interpretierbar
+  \item Beispiel: Schulnoten
+\end{itemize}
+
+\textbf{Metrisch skaliert}
+\begin{itemize}
+  \item Zahlenwerte mit sinnvollen Differenzen
+  \item Beispiel: Gewicht, Durchmesser, Alter
+\end{itemize}
+
+\subsection{Diskret vs. kontinuierlich}
+\textbf{Diskret}
+\begin{itemize}
+  \item endlich oder abz\"ahlbar viele moegliche Werte
+\end{itemize}
+
+\textbf{Kontinuierlich / stetig}
+\begin{itemize}
+  \item Werte liegen in einem lueckenlosen Bereich / Intervall
+\end{itemize}
+
+\subsection{Arten der Statistik}
+\textbf{Beschreibende Statistik}
+\begin{itemize}
+  \item Daten aufbereiten, darstellen, zusammenfassen
+\end{itemize}
+
+\textbf{Schliessende Statistik}
+\begin{itemize}
+  \item aus Stichproben auf die Grundgesamtheit schliessen
+  \item dabei bleibt ein Irrtumsrisiko
+\end{itemize}
+
+\subsection{Bezug zur Wahrscheinlichkeitstheorie}
+Bei Zufallsstichproben:
+\begin{itemize}
+  \item Grundgesamtheit $\leftrightarrow \Omega$
+  \item statistische Einheit $\leftrightarrow \omega\in\Omega$
+  \item Merkmal $\leftrightarrow$ Zufallsvariable $X$
+  \item Stichprobe $\leftrightarrow (\omega_1,\dots,\omega_n)\in \Omega^n$
+\end{itemize}
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item Grundgesamtheit = alle interessierenden Objekte
+  \item Stichprobe = untersuchte Auswahl
+  \item nominal / ordinal / metrisch unterscheiden
+  \item diskret vs. stetig unterscheiden
+  \item beschreibend = Daten darstellen
+  \item schliessend = von Stichprobe auf Grundgesamtheit schliessen
+\end{itemize}
+
+\section{Kapitel 3.2: Univariate beschreibende Statistik}
+
+\subsection{Grundnotation}
+Gegeben sei eine Stichprobe
+\[
+x_1,\dots,x_n
+\]
+mit Stichprobenumfang $n$.
+
+Die verschiedenen beobachteten Werte seien
+\[
+a_1< a_2 < \dots < a_k.
+\]
+
+\textbf{Notation:}
+\begin{itemize}
+  \item $n_i$ = absolute Haeufigkeit von $a_i$
+  \item $r_i=\frac{n_i}{n}$ = relative Haeufigkeit von $a_i$
+  \item stets: $\sum_{i=1}^k n_i=n$ und $\sum_{i=1}^k r_i=1$
+\end{itemize}
+
+\subsection{Relative Haeufigkeitsfunktion}
+\[
+\hat f(x)=
+\begin{cases}
+r_i,& x=a_i\\
+0,& \text{sonst}
+\end{cases}
+\]
+
+\textbf{Bedeutung:}
+\begin{itemize}
+  \item $\hat f(x)$ = Anteil der Stichprobendaten mit Wert $x$
+  \item diskretes Gegenstueck zu $P(X=x)$
+\end{itemize}
+
+\subsection{Empirische Verteilungsfunktion}
+\[
+\hat F(x)=\frac{1}{n}\#\{j: x_j\le x\}
+\]
+
+aequivalent:
+\[
+\hat F(x)=
+\begin{cases}
+0,& x<a_1\\
+r_1+\dots+r_i,& a_i\le x<a_{i+1}\\
+1,& x\ge a_k
+\end{cases}
+\]
+
+\textbf{Merke:}
+\begin{itemize}
+  \item $\hat F$ ist eine Treppenfunktion.
+  \item Spruenge liegen bei $a_i$.
+  \item Sprunghoehe an $a_i$ ist $r_i=\hat f(a_i)$.
+\end{itemize}
+
+\subsection{Bezug zur Wahrscheinlichkeit}
+Bei einer Zufallsstichprobe gilt fuer grosses $n$ heuristisch:
+\[
+\hat f(x)\approx P(X=x),\qquad \hat F(x)\approx F(x)=P(X\le x).
+\]
+
+\textbf{Merke:}
+Relative Haeufigkeit ist die empirische Version von Wahrscheinlichkeit.
+
+\subsection{Datenfriedhof und Klasseneinteilung}
+Bei vielen verschiedenen Werten ist das Stabdiagramm oft unbrauchbar. Dann in Klassen
+\[
+I_1,\dots,I_k
+\]
+einteilen.
+
+Fuer Klasse $I_i$ mit Breite $\Delta x_i$:
+\begin{itemize}
+  \item $n_i$ = Klassenhaeufigkeit
+  \item $r_i=\frac{n_i}{n}$ = relative Klassenhaeufigkeit
+  \item $f_i=\frac{r_i}{\Delta x_i}$ = Klassenhaeufigkeitsdichte
+  \item $F_i=r_1+\dots+r_i=\sum_{j=1}^i f_j\Delta x_j$
+\end{itemize}
+
+\textbf{Faustregel aus dem Blatt:}
+\[
+k\approx 2\ln(n)\qquad (n\ge 50)
+\]
+
+\subsection{Histogramm}
+Im Histogramm ist ueber Klasse $I_i$ ein Balken mit
+\begin{itemize}
+  \item Breite $\Delta x_i$
+  \item Hoehe $f_i=\frac{r_i}{\Delta x_i}$
+\end{itemize}
+einzuzeichnen.
+
+Dann gilt:
+\[
+\text{Flaeche des Balkens}=f_i\Delta x_i=r_i.
+\]
+
+\textbf{Extrem wichtig:}
+\begin{itemize}
+  \item Nicht $r_i$ als Hoehe nehmen, sondern $f_i$.
+  \item Im Histogramm repraesentiert die \textbf{Flaeche} die relative Haeufigkeit.
+  \item Summe aller Balkenflaechen = $1$.
+\end{itemize}
+
+\subsection{Lagemasse}
+\textbf{Arithmetisches Mittel}
+\[
+\bar x=\frac{1}{n}\sum_{j=1}^n x_j=\sum_{i=1}^k r_i a_i
+\]
+
+\textbf{Median}
+
+Zuerst Daten sortieren:
+\[
+x_{(1)}\le x_{(2)}\le \dots \le x_{(n)}.
+\]
+
+Dann:
+\[
+\tilde x=
+\begin{cases}
+x_{(\frac{n+1}{2})},& n\ \text{ungerade}\\[1mm]
+\frac12\bigl(x_{(\frac n2)}+x_{(\frac n2+1)}\bigr),& n\ \text{gerade}
+\end{cases}
+\]
+
+\textbf{Merke:}
+\begin{itemize}
+  \item $\bar x$ reagiert empfindlich auf Ausreisser.
+  \item Median ist robuster gegen Ausreisser.
+\end{itemize}
+
+\subsection{Streuungsmasse}
+\textbf{Spannweite}
+\[
+R=x_{\max}-x_{\min}
+\]
+
+\textbf{Empirische Varianz}
+\[
+s^2=\frac{1}{n-1}\sum_{j=1}^n (x_j-\bar x)^2
+\]
+
+\textbf{Empirische Standardabweichung}
+\[
+s=\sqrt{s^2}
+\]
+
+\textbf{Rechenhilfe}
+\[
+\sum_{j=1}^n (x_j-\bar x)^2=\sum_{j=1}^n x_j^2-n\bar x^2
+\]
+
+also
+\[
+s^2=\frac{1}{n-1}\left(\sum_{j=1}^n x_j^2-n\bar x^2\right).
+\]
+
+\textbf{Typischer Fall:}
+Wenn in der Aufgabe $x_1,\dots,x_n$ direkt gegeben sind, erst $\bar x$, dann $\sum x_j^2$, dann $s^2$.
+
+\subsection{Typische Klausuraufgaben}
+\textbf{1. Haeufigkeitstabelle bauen}
+\begin{enumerate}
+  \item verschiedene Werte $a_i$ sortieren
+  \item $n_i$ zaehlen
+  \item $r_i=n_i/n$
+  \item kumulieren fuer $\hat F$
+\end{enumerate}
+
+\textbf{2. Histogramm zeichnen}
+\begin{enumerate}
+  \item Klassen festlegen
+  \item $n_i$, $r_i$ bestimmen
+  \item Hoehe $f_i=r_i/\Delta x_i$
+  \item Flaechen checken
+\end{enumerate}
+
+\textbf{3. Lage- und Streuungsmasse}
+\begin{enumerate}
+  \item $\bar x$ berechnen
+  \item Median aus sortierten Daten
+  \item $R$, $s^2$, $s$
+\end{enumerate}
+
+\subsection{Typische Fallen}
+\begin{itemize}
+  \item Histogrammhoehe mit relativer Haeufigkeit statt Dichte verwechselt.
+  \item Bei geradem $n$ den Median falsch genommen.
+  \item In $s^2$ versehentlich durch $n$ statt durch $n-1$ geteilt.
+  \item Unsortierte Daten fuer den Median benutzt.
+\end{itemize}
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item $r_i=\frac{n_i}{n}$, \ $\hat f(a_i)=r_i$
+  \item $\hat F(x)=\frac1n\#\{j:x_j\le x\}$
+  \item Histogramm: Hoehe $f_i=\frac{r_i}{\Delta x_i}$, Flaeche $=r_i$
+  \item $\bar x=\frac1n\sum x_j$
+  \item $s^2=\frac{1}{n-1}\sum (x_j-\bar x)^2$
+  \item $s=\sqrt{s^2}$
+\end{itemize}
+
+\section{Kapitel 4.1: Parameterschaetzung}
+
+\subsection{Worum geht es?}
+Die Verteilung einer Zufallsvariable haengt von unbekannten Parametern ab, z.B.
+\begin{itemize}
+  \item Bernoulli / Binomial: $p$
+  \item Normalverteilung: $\mu$, $\sigma^2$
+\end{itemize}
+
+Ziel:
+Diese unbekannten Parameter aus einer Stichprobe schaetzen.
+
+\subsection{Standardmodell fuer Anteilsprobleme}
+Bei Ja/Nein-Eigenschaft:
+\[
+X(\omega)=
+\begin{cases}
+1,& \text{Eigenschaft liegt vor}\\
+0,& \text{sonst}
+\end{cases}
+\]
+
+Dann gilt:
+\[
+X\sim \operatorname{Bern}(p),\qquad E(X)=p,\qquad D^2(X)=pq,\quad q=1-p.
+\]
+
+Bei einer Zufallsstichprobe:
+\[
+X_1,\dots,X_n \text{ iid wie } X.
+\]
+
+\subsection{Relative Haeufigkeit als Schluesselgroesse}
+Die Stichprobenmittelzahl
+\[
+\bar X=\frac1n\sum_{i=1}^n X_i
+\]
+ist bei Bernoulli-Daten genau die relative Haeufigkeit der interessierenden Eigenschaft.
+
+Aus frueheren Kapiteln:
+\[
+E(\bar X)=p,\qquad D^2(\bar X)=\frac{pq}{n}.
+\]
+
+\subsection{Idee von Punkt- und Intervallschaetzung}
+\textbf{Punktschaetzung:}
+Ein einzelner Wert, z.B.
+\[
+\hat p=\bar X.
+\]
+
+\textbf{Intervallschaetzung:}
+Ein zufaelliges Intervall um den Schaetzwert, z.B.
+\[
+[\bar X-c,\bar X+c].
+\]
+
+\subsection{Warum funktioniert das?}
+Mit Tschebyscheff:
+\[
+P(|\bar X-p|>c)\le \frac{pq}{nc^2}\le \frac{1}{4nc^2}.
+\]
+
+Also
+\[
+P(|\bar X-p|\le c)\ge 1-\frac{pq}{nc^2}\ge 1-\frac{1}{4nc^2}.
+\]
+
+\textbf{Merke:}
+\begin{itemize}
+  \item groesseres $n$ $\Rightarrow$ genauere Schaetzung
+  \item kleineres $c$ $\Rightarrow$ engeres, aber schwerer erreichbares Intervall
+  \item $\gamma$ = Vertrauensniveau, oft $0.95$ oder $0.99$
+\end{itemize}
+
+\subsection{Typische Notation}
+\begin{itemize}
+  \item wahrer unbekannter Parameter: $p$, $\mu$, $\sigma^2$, allgemein $\vartheta$
+  \item Schaetzwert: $\hat p$, $\hat\mu$, $\widehat{\sigma^2}$, allgemein $\hat\vartheta$
+  \item Stichprobe: $X_1,\dots,X_n$
+  \item beobachtete Werte: $x_1,\dots,x_n$
+\end{itemize}
+
+\subsection{Typische Klausurideen}
+\textbf{1. Anteil modellieren}
+\begin{itemize}
+  \item Indikatorvariable $X\in\{0,1\}$ definieren
+  \item dann Bernoulli-Modell benutzen
+\end{itemize}
+
+\textbf{2. Schaetzidee begruenden}
+\begin{itemize}
+  \item $\bar X$ liegt nahe bei $p$, weil $E(\bar X)=p$ und $D^2(\bar X)=pq/n\to 0$
+\end{itemize}
+
+\textbf{3. noetigen Stichprobenumfang abschaetzen}
+\[
+1-\frac{1}{4nc^2}\ge \gamma
+\]
+nach $n$ aufloesen.
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item unbekannter Parameter soll aus Stichprobe geschaetzt werden
+  \item bei Anteilen: $X\sim \operatorname{Bern}(p)$
+  \item $\bar X=\frac1n\sum X_i$ ist relative Haeufigkeit
+  \item $E(\bar X)=p$, \ $D^2(\bar X)=pq/n$
+  \item Punktschaetzung = einzelner Wert, Intervallschaetzung = Bereich
+\end{itemize}
+
+\section{Kapitel 4.2: Punktschaetzung}
+
+\subsection{Allgemeine Form}
+Eine Schaetzfunktion ist eine Funktion der Stichprobe:
+\[
+\hat\vartheta=t_n(x_1,\dots,x_n).
+\]
+
+Als Zufallsvariable geschrieben:
+\[
+T_n=t_n(X_1,\dots,X_n).
+\]
+
+\textbf{Merke:}
+\begin{itemize}
+  \item $\vartheta$ = wahrer Parameter
+  \item $\hat\vartheta$ = konkreter Schaetzwert aus Daten
+  \item $T_n$ = zugehoeriger Schaetzer als Zufallsvariable
+\end{itemize}
+
+\subsection{Wichtige Standardschaetzer}
+\textbf{Unbekannter Mittelwert $\mu$}
+\[
+\hat\mu=\bar X=\frac1n\sum_{i=1}^n X_i
+\]
+
+Eigenschaften:
+\[
+E(\bar X)=\mu,\qquad D^2(\bar X)=\frac{\sigma^2}{n}.
+\]
+
+\textbf{Unbekannte Varianz $\sigma^2$}
+\[
+S^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar X)^2
+\]
+
+und fuer beobachtete Daten:
+\[
+s^2=\frac{1}{n-1}\sum_{i=1}^n (x_i-\bar x)^2.
+\]
+
+\textbf{Extrem wichtig:}
+\[
+E(S^2)=\sigma^2.
+\]
+
+Darum nimmt man bei Schaetzung der Varianz
+\[
+\frac{1}{n-1}\sum (X_i-\bar X)^2
+\]
+und nicht die Version mit $\frac1n$.
+
+\subsection{Erwartungstreue}
+Definition:
+\[
+E(T_n)=\vartheta
+\]
+
+\textbf{Bedeutung:}
+Der Schaetzer trifft den wahren Parameter im Mittel richtig.
+
+\textbf{Bias / Verzerrung:}
+\[
+\operatorname{Bias}(T_n)=E(T_n)-\vartheta.
+\]
+
+\textbf{Merke:}
+\begin{itemize}
+  \item erwartungstreu $\Leftrightarrow \operatorname{Bias}(T_n)=0$
+  \item $\bar X$ ist erwartungstreu fuer $\mu$
+  \item $S^2$ ist erwartungstreu fuer $\sigma^2$
+\end{itemize}
+
+\subsection{Konsistenz}
+Definition:
+\[
+\forall \varepsilon>0:\quad P(|T_n-\vartheta|\ge \varepsilon)\to 0 \qquad (n\to\infty)
+\]
+
+\textbf{Bedeutung:}
+Mit wachsendem $n$ landet der Schaetzer immer wahrscheinlicher nahe am wahren Wert.
+
+\textbf{Merke:}
+Konsistenz ist das ``langfristig richtig''-Kriterium.
+
+\subsection{Effizienz}
+Sind $T_n$ und $T_n'$ beide erwartungstreu, dann ist der Schaetzer mit kleinerer Varianz besser.
+
+\[
+D^2(T_n)<D^2(T_n')
+\]
+bedeutet:
+$T_n$ streut weniger um den wahren Wert.
+
+\textbf{Definition:}
+Effizient = erwartungstreu und unter den erwartungstreuen Schaetzern minimale Varianz.
+
+\subsection{Typische Klausuraufgaben}
+\textbf{1. Erwartungstreue pruefen}
+\begin{enumerate}
+  \item Schaetzer $T_n$ hinschreiben
+  \item $E(T_n)$ mit Linearitaet ausrechnen
+  \item mit $\vartheta$ vergleichen
+\end{enumerate}
+
+\textbf{2. Besseren Schaetzer waehlen}
+\begin{enumerate}
+  \item erst Erwartungstreue pruefen
+  \item dann Varianzen vergleichen
+  \item kleinere Varianz gewinnt
+\end{enumerate}
+
+\textbf{3. Varianzschaetzer erkennen}
+\begin{itemize}
+  \item fuer Erwartungstreue der Varianz steht fast immer der Faktor $\frac{1}{n-1}$ da
+\end{itemize}
+
+\subsection{Rechenmuster}
+\textbf{Linearitaet des Erwartungswerts}
+\[
+E\left(\sum a_iX_i+c\right)=\sum a_iE(X_i)+c
+\]
+
+\textbf{Varianz bei Unabhaengigkeit}
+\[
+D^2\left(\sum a_iX_i\right)=\sum a_i^2D^2(X_i)
+\]
+
+damit pruefst du fast alle Aufgaben zu vorgegebenen Schaetzern.
+
+\subsection{Typische Fallen}
+\begin{itemize}
+  \item Schaetzwert $\hat\vartheta$ und Schaetzer $T_n$ vermischt.
+  \item Nur Erwartungstreue geprueft, aber nicht die Streuung.
+  \item Bei Varianzschaetzung den Faktor $n-1$ vergessen.
+  \item Konsistenz mit Erwartungstreue verwechselt.
+\end{itemize}
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item $\hat\vartheta=t_n(x_1,\dots,x_n)$
+  \item $T_n=t_n(X_1,\dots,X_n)$
+  \item erwartungstreu: $E(T_n)=\vartheta$
+  \item konsistent: $P(|T_n-\vartheta|\ge\varepsilon)\to 0$
+  \item effizient: unter erwartungstreuen Schaetzern kleinste Varianz
+  \item $\hat\mu=\bar X$, \ $\widehat{\sigma^2}=S^2=\frac{1}{n-1}\sum (X_i-\bar X)^2$
+\end{itemize}
+
+\section{Kapitel 4.4: Hypothesentest}
+
+\subsection{Grundidee}
+Ein Hypothesentest ist eine Entscheidungsregel auf Basis einer Stichprobe:
+\begin{itemize}
+  \item $H_0$ = Nullhypothese
+  \item $H_1$ = Alternative
+\end{itemize}
+
+Am Ende wird entweder
+\begin{itemize}
+  \item $H_0$ beibehalten oder
+  \item $H_0$ verworfen
+\end{itemize}
+
+\textbf{Merke:}
+``$H_0$ verwerfen'' bedeutet gleichzeitig ``$H_1$ annehmen''.
+
+\subsection{Testfunktion und kritischer Bereich}
+Ein Test basiert auf einer Prueffunktion / Testfunktion
+\[
+T_n=t_n(X_1,\dots,X_n).
+\]
+
+Der Wertebereich wird zerlegt in:
+\begin{itemize}
+  \item $O$ = OK-Bereich / Annahmebereich fuer $H_0$
+  \item $K$ = kritischer Bereich / Ablehnungsbereich fuer $H_0$
+\end{itemize}
+
+Entscheidungsregel:
+\[
+T_n\in O \Rightarrow H_0 \text{ beibehalten},\qquad
+T_n\in K \Rightarrow H_0 \text{ verwerfen}.
+\]
+
+\subsection{Fehler 1. und 2. Art}
+\textbf{Fehler 1. Art}
+\[
+H_0 \text{ ist wahr, wird aber verworfen}
+\]
+Wahrscheinlichkeit hoechstens
+\[
+\alpha.
+\]
+
+\textbf{Fehler 2. Art}
+\[
+H_1 \text{ ist wahr, aber } H_0 \text{ wird beibehalten}
+\]
+oft mit Wahrscheinlichkeit $\beta$ abgeschaetzt.
+
+\textbf{Extrem wichtig:}
+\begin{itemize}
+  \item $\alpha$ wird vorgegeben.
+  \item $\beta$ ist meist nicht gleichzeitig frei kontrollierbar.
+  \item $1-\alpha$ ist \textbf{nicht} die Wahrscheinlichkeit, dass $H_1$ wahr ist.
+\end{itemize}
+
+\subsection{Rollen von $H_0$ und $H_1$}
+Die Rollen sind \textbf{nicht} austauschbar.
+
+\textbf{Merke:}
+In $H_0$ steckt die Aussage, die man nur bei genuegend starkem Widerspruch verwirft.
+
+Typische Formen:
+\begin{itemize}
+  \item zweiseitig: $H_0:\mu=\mu_0$ gegen $H_1:\mu\ne\mu_0$
+  \item rechtsseitig: $H_0:p\le p_0$ gegen $H_1:p>p_0$
+  \item linksseitig: $H_0:\mu\ge \mu_0$ gegen $H_1:\mu<\mu_0$
+\end{itemize}
+
+\subsection{Guetefunktion und Testcharakteristik}
+\[
+G(\vartheta)=P_\vartheta(T_n\in K)
+\]
+= Wahrscheinlichkeit, dass der Test $H_0$ verwirft.
+
+\[
+L(\vartheta)=P_\vartheta(T_n\in O)
+\]
+= Wahrscheinlichkeit, dass der Test $H_0$ beibehaelt.
+
+Es gilt:
+\[
+L(\vartheta)+G(\vartheta)=1.
+\]
+
+\subsection{Wichtiger Standardtest}
+\textbf{Zweiseitiger Test fuer den Mittelwert einer normalverteilten Variable bei bekannter Varianz}
+
+Voraussetzungen:
+\[
+X_1,\dots,X_n \text{ iid } \sim \mathcal N(\mu,\sigma^2),\qquad \sigma^2 \text{ bekannt}
+\]
+
+Hypothesen:
+\[
+H_0:\mu=\mu_0,\qquad H_1:\mu\ne \mu_0
+\]
+
+Testfunktion:
+\[
+T_n=\bar X=\frac1n\sum_{i=1}^n X_i
+\]
+
+unter $H_0$ gilt:
+\[
+\bar X\sim \mathcal N\left(\mu_0,\frac{\sigma^2}{n}\right).
+\]
+
+\subsection{Kritischer Bereich beim zweiseitigen $\mu$-Test}
+Mit Signifikanzniveau $\alpha$:
+\[
+K=\left(-\infty,\mu_0-c\right)\cup \left(\mu_0+c,\infty\right)
+\]
+
+mit
+\[
+c=\frac{\sigma}{\sqrt n}\,u_{1-\alpha/2}
+\]
+
+wobei $u_{1-\alpha/2}$ das $(1-\alpha/2)$-Quantil der Standardnormalverteilung ist.
+
+Also:
+\[
+H_0 \text{ verwerfen } \Longleftrightarrow |\bar X-\mu_0|> \frac{\sigma}{\sqrt n}u_{1-\alpha/2}.
+\]
+
+aequivalent standardisiert:
+\[
+Z=\frac{\bar X-\mu_0}{\sigma/\sqrt n}
+\]
+und
+\[
+H_0 \text{ verwerfen } \Longleftrightarrow |Z|>u_{1-\alpha/2}.
+\]
+
+\subsection{Wichtige Quantile}
+\begin{itemize}
+  \item bei $\alpha=0.05$: $u_{0.975}\approx 1.96$
+  \item bei $\alpha=0.01$: $u_{0.995}\approx 2.576$
+\end{itemize}
+
+\subsection{Typische Klausuraufgaben}
+\textbf{1. Ablehnen oder nicht?}
+\begin{enumerate}
+  \item Hypothesen hinschreiben
+  \item $\bar x$ berechnen
+  \item Testgroesse $Z=\frac{\bar x-\mu_0}{\sigma/\sqrt n}$ berechnen
+  \item mit kritischem Wert vergleichen
+\end{enumerate}
+
+\textbf{2. Minimal noetiges $n$ finden}
+Aus
+\[
+|\bar x-\mu_0|>\frac{\sigma}{\sqrt n}u_{1-\alpha/2}
+\]
+nach $n$ aufloesen:
+\[
+n>\left(\frac{\sigma\,u_{1-\alpha/2}}{|\bar x-\mu_0|}\right)^2.
+\]
+
+\textbf{3. Testart erkennen}
+\begin{itemize}
+  \item ``ungleich'' $\Rightarrow$ zweiseitig
+  \item ``groesser'' $\Rightarrow$ rechtsseitig
+  \item ``kleiner'' $\Rightarrow$ linksseitig
+\end{itemize}
+
+\subsection{Typische Fallen}
+\begin{itemize}
+  \item $H_0$ und $H_1$ vertauscht.
+  \item Aus ``$H_0$ nicht verworfen'' faelschlich ``$H_0$ ist bewiesen'' gemacht.
+  \item $\alpha$ als Wahrscheinlichkeit interpretiert, dass $H_0$ oder $H_1$ wahr ist.
+  \item Bei zweiseitigem Test $u_{1-\alpha}$ statt $u_{1-\alpha/2}$ benutzt.
+  \item $\sigma/\sqrt n$ vergessen.
+\end{itemize}
+
+\subsection{Mini-Merkliste}
+\begin{itemize}
+  \item Test = Entscheidung zwischen $H_0$ und $H_1$
+  \item Fehler 1. Art: wahres $H_0$ verworfen, Wkt. $\le \alpha$
+  \item Fehler 2. Art: falsches $H_0$ beibehalten
+  \item ``nicht verworfen'' heisst nicht ``bewiesen''
+  \item bei $H_0:\mu=\mu_0$ und bekannter $\sigma^2$:
+  \[
+  Z=\frac{\bar X-\mu_0}{\sigma/\sqrt n}
+  \]
+  \item zweiseitig ablehnen, wenn $\displaystyle |Z|>u_{1-\alpha/2}$
+\end{itemize}
+
+\end{document}
