@@ -664,7 +664,75 @@ z_{0.95}\approx 1.645,\quad z_{0.975}\approx 1.96,\quad z_{0.995}\approx 2.576
   \item Behauptung pruefen? $\Rightarrow$ Test
 \end{itemize}
 
-\section*{15. Notation, die Punkte bringt}
+\section*{15. Typische Klausurmuster}
+\textbf{ZV als Abbildung definieren}
+\begin{itemize}
+  \item ``$X:\Omega\to\mathbb{R},\ X(\omega)=$ Anzahl / Laenge / Trefferzahl \dots''
+  \item Bildmenge explizit angeben, z.B. $W(X)=\{0,\dots,n\}$
+\end{itemize}
+
+\textbf{Gemeinsame Verteilung / Unabhaengigkeit}
+\begin{itemize}
+  \item Tabelle fuellen: alle moeglichen Paare $(x,y)$ systematisch zaehlen
+  \item unabhaengig? $\Rightarrow P(X=x,Y=y)\stackrel{?}=P(X=x)P(Y=y)$
+  \item oder bei Ereignissen: $P(A\cap B)\stackrel{?}=P(A)P(B)$
+\end{itemize}
+
+\textbf{Kovarianz / Korrelation}
+\[
+\Cov(X,Y)=\rho(X,Y)\sigma_X\sigma_Y
+\]
+\[
+\rho(X,Y)=\frac{\Cov(X,Y)}{\sigma_X\sigma_Y}
+\]
+\[
+\Var(X+Y)=\Var(X)+\Var(Y)+2\Cov(X,Y)
+\]
+
+\textbf{Anteil schaetzen / Konfidenzintervall}
+\[
+\hat p=r_n=\frac{1}{n}\sum_{i=1}^n X_i
+\]
+fuer grosses $n$:
+\[
+\hat p \pm z_{(1+\gamma)/2}\sqrt{\frac{\hat p(1-\hat p)}{n}}
+\]
+
+\textbf{Konfidenzintervall fuer $\mu$ bei bekannter $\sigma$}
+\[
+\overline X \pm z_{(1+\gamma)/2}\frac{\sigma}{\sqrt n}
+\]
+
+\textbf{Tschebyscheff fuer relative Haeufigkeit}
+\[
+P(|r_n-p|\ge \varepsilon)\le \frac{p(1-p)}{n\varepsilon^2}\le \frac{1}{4n\varepsilon^2}
+\]
+also fuer Schranke $\le \delta$:
+\[
+n\ge \frac{1}{4\delta\varepsilon^2}
+\]
+
+\textbf{Normalapproximation der Binomialverteilung}
+\begin{itemize}
+  \item erst $X\sim\Bin(n,p)$ erkennen
+  \item dann $X\approx \Normal(np,np(1-p))$
+  \item Stetigkeitskorrektur nicht vergessen
+\end{itemize}
+
+\textbf{Einseitiger Test fuer Anteil oder Mittelwert}
+\begin{itemize}
+  \item ``haeufiger / groesser'' $\Rightarrow H_1:\theta>\theta_0$
+  \item ``seltener / kleiner'' $\Rightarrow H_1:\theta<\theta_0$
+  \item ``anders'' $\Rightarrow H_1:\theta\neq\theta_0$
+\end{itemize}
+
+\textbf{Stetige Dichteaufgaben}
+\begin{itemize}
+  \item Konstante $c$ suchen: $\int f(x)\dd x=1$
+  \item dann $E(X)=\int x f(x)\dd x$, $\Var(X)=E(X^2)-E(X)^2$
+\end{itemize}
+
+\section*{16. Notation, die Punkte bringt}
 \begin{itemize}
   \item Ereignisse als Mengen notieren, nicht nur in Worten
   \item Zufallsvariable benennen: ``Sei $X$ = Anzahl der Treffer''
@@ -673,7 +741,7 @@ z_{0.95}\approx 1.645,\quad z_{0.975}\approx 1.96,\quad z_{0.995}\approx 2.576
   \item am Ende Antwortsatz mit Kontext
 \end{itemize}
 
-\section*{16. Symbollegende}
+\section*{17. Symbollegende}
 \begin{itemize}
   \item $\omega$: einzelnes Ergebnis eines Zufallsexperiments
   \item $\Omega$: Ergebnismenge, also alle moeglichen Ergebnisse
