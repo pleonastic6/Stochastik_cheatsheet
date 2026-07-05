@@ -716,6 +716,21 @@ z_{0.95}\approx 1.645,\quad z_{0.975}\approx 1.96,\quad z_{0.995}\approx 2.576
 \[
 \Var(X+Y)=\Var(X)+\Var(Y)+2\Cov(X,Y)
 \]
+\textbf{Kovarianzmatrix fuer zwei Variablen}
+\[
+\Sigma=
+\begin{pmatrix}
+\Var(X) & \Cov(X,Y) \\
+\Cov(X,Y) & \Var(Y)
+\end{pmatrix}
+\]
+Falls $\rho(X,Y)$ gegeben ist:
+\[
+\sigma_X=\sqrt{\Var(X)},\qquad \sigma_Y=\sqrt{\Var(Y)}
+\]
+\[
+\Cov(X,Y)=\rho(X,Y)\sigma_X\sigma_Y
+\]
 
 \textbf{Anteil schaetzen / Konfidenzintervall}
 \[
