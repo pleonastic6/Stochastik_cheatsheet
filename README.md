@@ -1,7 +1,8 @@
 # Stochastik Cheatsheet
 
-LaTeX-Quelle fuer ein kompaktes Stochastik-Cheatsheet.
+LaTeX-Quellen fuer ein Stochastik-Cheatsheet.
 
 ## Inhalt
 
-- `stochastik_cheatsheet.tex`: laufend gepflegte Hauptdatei
+- `stochastik_cheatsheet.tex`: ausfuehrliche laufende Sammlung nach Kapiteln
+- `stochastik_cheatsheet_kompakt.tex`: stark verdichtete Klausur-Kompaktfassung
