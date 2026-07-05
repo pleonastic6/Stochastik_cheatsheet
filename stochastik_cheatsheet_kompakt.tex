@@ -238,6 +238,14 @@ P(A\mid B)=P(A),\qquad P(B\mid A)=P(B)
 \end{itemize}
 
 \section*{5. Diskrete Standardverteilungen}
+\textbf{Merkschema}
+\begin{itemize}
+  \item Einsatz: Wann passt die Verteilung?
+  \item Wertebereich $W(X)$: Welche Werte kann $X$ annehmen?
+  \item Formel: $P(X=k)$
+  \item Lage/Streuung: $E(X)$ und $\Var(X)$
+\end{itemize}
+
 Bernoulli:
 \[
 X\sim\Ber(p),\quad P(X=1)=p,\quad P(X=0)=1-p
@@ -276,11 +284,24 @@ E(X)=n\frac{M}{N},\quad \Var(X)=n\frac{M}{N}\left(1-\frac{M}{N}\right)\frac{N-n}
 \]
 Nutzen: Ziehen ohne Zuruecklegen.
 
+Poisson:
+\[
+X\sim\mathrm{Poi}(\lambda),\quad W(X)=\{0,1,2,\dots\}
+\]
+\[
+P(X=k)=\frac{\lambda^k e^{-\lambda}}{k!}
+\]
+\[
+E(X)=\lambda,\quad \Var(X)=\lambda
+\]
+Nutzen: Anzahl seltener Ereignisse pro Zeit-/Raumintervall.
+
 \textbf{Entscheidung}
 \begin{itemize}
   \item mit Zuruecklegen / unabhaengig $\Rightarrow$ binomial
   \item bis erster Treffer $\Rightarrow$ geometrisch
   \item ohne Zuruecklegen $\Rightarrow$ hypergeometrisch
+  \item seltene Ereignisse pro Intervall $\Rightarrow$ Poisson
 \end{itemize}
 
 \section*{6. Erwartungswert und Varianz}
@@ -422,6 +443,13 @@ E(g(X))=\int_{-\infty}^{\infty}g(x)f(x)\dd x
 \]
 
 \section*{9. Stetige Standardverteilungen}
+\textbf{Merkschema}
+\begin{itemize}
+  \item Einsatz: Welche Situation beschreibt $X$?
+  \item Dichte $f(x)$ und oft auch Verteilungsfunktion $F(x)$
+  \item Lage/Streuung: $E(X)$ und $\Var(X)$
+\end{itemize}
+
 Gleichverteilung auf $[a,b]$:
 \[
 X\sim \Unif[a,b],\quad f(x)=\frac{1}{b-a}
