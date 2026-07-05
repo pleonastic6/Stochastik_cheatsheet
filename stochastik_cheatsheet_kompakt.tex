@@ -89,6 +89,37 @@ Wenn $p(i)=c f(i)$:
 \sum_i c f(i)=1 \Rightarrow c=\frac{1}{\sum_i f(i)}
 \]
 
+\textbf{Template fuer Wahrscheinlichkeitsfunktionen}
+\begin{itemize}
+  \item 1. Ergebnismenge festlegen: $\Omega=\{\omega_1,\dots,\omega_n\}$
+  \item 2. Jedem Ergebnis eine Einzelwahrscheinlichkeit geben: $p(\omega_i)$
+  \item 3. Pruefen: $p(\omega_i)\ge 0$ und $\sum_{\omega\in\Omega}p(\omega)=1$
+  \item 4. Ereigniswahrscheinlichkeit ueber Summe: $P(A)=\sum_{\omega\in A}p(\omega)$
+\end{itemize}
+
+\textbf{Wuerfelbeispiel}
+\[
+\Omega=\{1,2,3,4,5,6\},\qquad p(i)=\frac16 \text{ fuer } i=1,\dots,6
+\]
+\[
+\sum_{i=1}^6 p(i)=6\cdot \frac16=1
+\]
+Fuer $A=\{2,4,6\}$:
+\[
+P(A)=p(2)+p(4)+p(6)=\frac16+\frac16+\frac16=\frac12
+\]
+
+\textbf{Wenn Konstante gesucht ist}
+\[
+p(i)=c\cdot f(i)\ \Rightarrow\ \sum_i p(i)=1\ \Rightarrow\ c=\frac{1}{\sum_i f(i)}
+\]
+
+\textbf{Sauberer Klausursatz}
+\begin{itemize}
+  \item ``Definiere $p:\Omega\to[0,1]$ durch $p(i)=\dots$.''
+  \item ``Da $p(i)\ge 0$ und $\sum_{\omega\in\Omega}p(\omega)=1$, ist $p$ eine Wahrscheinlichkeitsfunktion.''
+\end{itemize}
+
 Zufallsvariable:
 \[
 X:\Omega\to\mathbb{R},\qquad P_X(B)=P(X\in B)=P(X^{-1}(B))
